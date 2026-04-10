@@ -24,7 +24,7 @@ Combinar **física** (trayectorias parabólicas, viento, rotación) con **elemen
 
 ## Estructura del Repositorio
 
-
+```
 sangre-de-dioses/
 ├── Desarrollo/ 
 │   ├── main.cpp
@@ -37,7 +37,7 @@ sangre-de-dioses/
 │   └── Sprites/               
 │
 └── README.md
-text---
+```
 
 ## Características Principales (Momento 1)
 
