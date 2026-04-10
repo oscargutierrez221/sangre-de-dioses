@@ -26,12 +26,12 @@ Combinar **física** (trayectorias parabólicas, viento, rotación) con **elemen
 
 ```
 sangre-de-dioses/
-├── Desarrollo/ 
+├── Desarrollo/             # Codigo fuente
 │   ├── main.cpp
 │   ├── Desarrollo.pro
 │   └── build/...
 │
-├── Momento 1/
+├── Momento 1/              # Desarrollo entregable 1
 │   ├── Informe preliminar/
 │   │   └── PRIMER MOMENTO.md
 │   └── Sprites/               
