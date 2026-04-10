@@ -1,0 +1,1 @@
+Como el juego será por turnos, entonces si tu puntaje no supera al de la maquina se da por sentado que has perdido
