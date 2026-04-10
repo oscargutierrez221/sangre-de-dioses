@@ -1,1 +1,2 @@
-Como el juego será por turnos, entonces si tu puntaje no supera al de la maquina se da por sentado que has perdido
+Como el juego será por turnos, entonces si tu puntaje no supera al de la maquina (loki) se da por sentado que has perdido
+Si loki ha hecho más puntos que tu entoncces tu pierdes
