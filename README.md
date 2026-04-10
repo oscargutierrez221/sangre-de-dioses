@@ -26,18 +26,17 @@ Combinar **física** (trayectorias parabólicas, viento, rotación) con **elemen
 
 
 sangre-de-dioses/
-├── Desarrollo/              # Código fuente del proyecto
+├── Desarrollo/                  # Código fuente del proyecto
 │   ├── main.cpp
 │   ├── Desarrollo.pro
 │   └── build/...
 │
-├── Momento 1/               # Entregables del primer momento
+├── Momento 1/                   # Entregables del primer momento
 │   ├── Informe preliminar/
 │   │   └── PRIMER MOMENTO.md
-│   └── Sprites/             # Recursos para el desarrollo
+│   └── Sprites/                 # Recursos
 │
 └── README.md
-
 text---
 
 ## Características Principales (Momento 1)
