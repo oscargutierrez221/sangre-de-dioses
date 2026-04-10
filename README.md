@@ -23,6 +23,8 @@ Combinar **física** (trayectorias parabólicas, viento, rotación) con **elemen
 ---
 
 ## Estructura del Repositorio
+
+
 sangre-de-dioses/
 ├── Desarrollo/              # Código fuente del proyecto
 │   ├── main.cpp
@@ -35,6 +37,7 @@ sangre-de-dioses/
 │   └── Sprites/             # Recursos para el desarrollo
 │
 └── README.md
+
 text---
 
 ## Características Principales (Momento 1)
