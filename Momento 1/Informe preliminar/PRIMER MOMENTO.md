@@ -15,7 +15,7 @@
 ---
 
 ## 2. Idea central:
-Juego mitológico de lanzamiento de jabalina. Los protagonistas son dioses de distintas culturas (Odín, Atenea, Lugh), cada uno con poderes y características únicas. El objetivo general es lanzar la jabalina desde una posición determinada para impactar un blanco, pero cada nivel introduce dinámicas distintas.
+Juego mitológico de lanzamiento de jabalina. Los protagonistas son dioses de distintas culturas (Odín, Atenea, Lugh), cada uno con poderes y características únicas. El objetivo general es lanzar la jabalina desde una posición determinada para impactar un blanco y ganar más puntos que la maquina, pero cada nivel introduce dinámicas distintas.
 
 ### **Nivel 1:** El ***“Juego de Baldur”*** (Mitología Nórdica)
 
@@ -55,6 +55,6 @@ Juego mitológico de lanzamiento de jabalina. Los protagonistas son dioses de di
 ### Agente autónomo:
 
 1. **Percepción:** Detecta cuándo el jugador lanza una jabalina.
-2. **Razonamiento:** Evalúa si puede intervenir para desviar el proyectil o introducir muérdago.
+2. **Razonamiento:** Evalúa si puede intervenir para desviar el proyectil o introducir muérdago, además, de poder lanzar con un angulo y una fuerzza aleatoria y así mostrar un mayor nivel de dificutad.
 3. **Acción:** Genera un obstáculo o altera la física del lanzamiento.
 4. **Aprendizaje:** Si el jugador repite un patrón de lanzamiento, aprende y anticipa la trayectoria para aumentar la dificultad.
