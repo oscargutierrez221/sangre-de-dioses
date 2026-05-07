@@ -34,7 +34,13 @@ sangre-de-dioses/
 ├── Momento 1/              # Desarrollo entregable 1
 │   ├── Informe preliminar/
 │   │   └── PRIMER MOMENTO.md
-│   └── Sprites/               
+│   └── Escenarios/
+│   └── Sprites/
+│
+├── Momento 2/              # Desarrollo entregable 2
+│   ├── Informe preliminar/
+│   │   └── SEGUNDO MOMENTO.md
+│   └── Material/           # Diagrama de clases y demás material usado      
 │
 └── README.md
 ```
