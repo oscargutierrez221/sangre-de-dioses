@@ -34,7 +34,13 @@ sangre-de-dioses/
 ├── Momento 1/              # Desarrollo entregable 1
 │   ├── Informe preliminar/
 │   │   └── PRIMER MOMENTO.md
-│   └── Sprites/               
+│   └── Escenarios/
+│   └── Sprites/
+│
+├── Momento 2/              # Desarrollo entregable 2
+│   ├── Informe preliminar/
+│   │   └── SEGUNDO MOMENTO.md
+│   └── Material/           # Diagrama de clases y demás material usado      
 │
 └── README.md
 ```
@@ -69,8 +75,9 @@ sangre-de-dioses/
 
 ## Estado Actual del Proyecto
 
-- **Fase:** Momento 1 completado (Informe preliminar + estructura inicial)
-- Código base en Qt creado
+- **Momento 1:** Completado ( Informe preliminar + estructura inicial + escenario (dibujo) + sprite (iniciales) )
+- **Momento 2:** Completado ( Informe preliminar + Diagrama de clases + actualizaacion del escenario (dibujo 2) )
+- **Código:** Falta crear el proyecto con la interfaz grafica de Qt correctamente
 - Sprites en proceso
 - Escenas en progreso
 
