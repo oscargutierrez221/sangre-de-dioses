@@ -1,9 +1,14 @@
-#include <iostream>
+#include "widget.h"
+#include <QApplication>
 
-using namespace std;
-
-int main()
+int main(int argc, char *argv[])
 {
-    cout << "Hello World!" << endl;
-    return 0;
+    QApplication a(argc, argv);
+    Widget w;
+    w.show();
+    w.resize(320, 240);
+    w.show();
+    w.setWindowTitle(
+        QApplication::translate("toplevel", "Top-level widget"));
+    return QCoreApplication::exec();
 }
