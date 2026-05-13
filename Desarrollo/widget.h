@@ -2,6 +2,8 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,7 +19,18 @@ public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget() override;
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_4_clicked();
+
 private:
     Ui::Widget *ui;
+    QGraphicsScene *scena;
+    QGraphicsPixmapItem *fondo1;
 };
 #endif // WIDGET_H

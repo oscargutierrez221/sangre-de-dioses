@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/FondosPersonajes">
+        <file>Material/ZEUZ.png</file>
+        <file>Material/POSEIDON.png</file>
+        <file>Material/HADES.png</file>
+        <file>Material/ARES.png</file>
+    </qresource>
+    <qresource prefix="/new/Fondos">
+        <file>Material/Fondo pantalla nivel 1.png</file>
+    </qresource>
+</RCC>
