@@ -9,4 +9,7 @@
         <file>Material/Fondo pantalla nivel 1.png</file>
         <file>Material/fondoCombate.png</file>
     </qresource>
+    <qresource prefix="/new/sprite_personajes">
+        <file>Material/SEUZ_sprite.png</file>
+    </qresource>
 </RCC>

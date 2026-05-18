@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class Widget;
@@ -30,9 +31,10 @@ private slots:
 
 private:
     Ui::Widget *ui;
-    QGraphicsScene *menu;
     QGraphicsScene *nivel1;
-    QGraphicsPixmapItem *fondo_2;
     QGraphicsPixmapItem *fondo1;
+
+    // Configuracion sprite
+    QTimer *timerJuego;  // El temporizador para controlar el bucle de movimiento
 };
 #endif // WIDGET_H

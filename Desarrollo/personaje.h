@@ -18,7 +18,6 @@ class personaje : public entidad
 
         // Metodos
         void actualizar_estado();
-        void lanzar(float x, float y);
         int poder(int cantidad);
 };
 
