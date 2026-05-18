@@ -30,7 +30,9 @@ private slots:
 
 private:
     Ui::Widget *ui;
-    QGraphicsScene *scena;
+    QGraphicsScene *menu;
+    QGraphicsScene *nivel1;
+    QGraphicsPixmapItem *fondo_2;
     QGraphicsPixmapItem *fondo1;
 };
 #endif // WIDGET_H

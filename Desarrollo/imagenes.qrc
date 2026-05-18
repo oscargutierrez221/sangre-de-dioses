@@ -7,5 +7,6 @@
     </qresource>
     <qresource prefix="/new/Fondos">
         <file>Material/Fondo pantalla nivel 1.png</file>
+        <file>Material/fondoCombate.png</file>
     </qresource>
 </RCC>
