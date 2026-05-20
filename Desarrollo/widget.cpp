@@ -47,29 +47,25 @@ void Widget::on_pushButton_clicked()
     fondo1->setPos(0, 0);
     nivel1->addItem(fondo1);
 
-    // Cargar sprite
+    // Cargar sprite=
     QMessageBox::information(this, "Zeuz", "Haz elejido al Dios del rayo");
 
     // 1. Creamos el personaje y lo posicionamos en la escena
-    entidad *personaje1 = new entidad(60, 210);
-    personaje1->cargar_sprite(":/new/sprite_personajes/Material/SEUZ_sprite.png");
-    nivel1->addItem(personaje1);
+    zeuz = new entidad();
+    zeuz->setPos(150, 210);
+    nivel1->addItem(zeuz);
 
-// //     // 3. Le asignamos una velocidad inicial
-//     personaje1->set_velocidad(5, 0);
+    zeuz->cargar_sprite(":/new/sprite_personajes/Material/SEUZ_sprite.png", 99, 200, 4); // Sprite, ancho, alto, cantidad de frames
 
-// //     // 4. Inicializamos el QTimer para controlar el bucle de movimiento
-//     timerJuego = new QTimer(this);
+    // 2. Temporizador para la velocidad del sprite
+    timerJuego = new QTimer(this);
+    connect(timerJuego, &QTimer::timeout, this, [this]() {
+        zeuz->actualizar_sprite();
+    });
 
-//      // 5. Conectamos el timer al método que actualizará la posición del personaje
-//     connect(timerJuego, &QTimer::timeout, this, [=]() {
-//         personaje1->actualizar_posicion();
-//     });
+    // 3. Velocidad del sprite
+    timerJuego->start(800);
 
-// //     // Arrancamos el timer para que lata cada 20 milisegundos (~50 FPS)
-//     timerJuego->start(20);
-
-    // Estoy intentando implementar que se mueva en su posicion y luego ir a personaje y jugador para implementar su logica
 }
 
 
@@ -149,3 +145,17 @@ void Widget::on_pushButton_4_clicked()
 
     QMessageBox::information(this, "Hera", "Haz elejido a la Diosa de la guerra");
 }
+
+void Widget::on_pushButton_lanzar_clicked()
+{
+        // El botón va por su cuenta y mira qué número hay guardado en la interfaz justo ahora:
+        int angulo = ui->spinBox_angulo->value();
+        int fuerza = ui->spinBox2_fuerza->value();
+
+        QMessageBox::information(this, "Lanzamiento", QString("Ángulo: %1 grados\nFuerza: %2").arg(angulo).arg(fuerza));
+
+        // Aquí es donde nacerá el proyectil (la jabalina) en la escena:
+        // proyectil = new entidad();
+        // proyectil->lanzar(angulo, fuerza);
+}
+

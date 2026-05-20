@@ -16,14 +16,14 @@
   <widget class="QStackedWidget" name="stackedWidget_2">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>-10</x>
      <y>0</y>
      <width>1391</width>
      <height>901</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page_3">
     <property name="styleSheet">
@@ -366,7 +366,212 @@ li.checked::marker { content: &quot;\2612&quot;; }
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="page_4"/>
+   <widget class="QWidget" name="page_4">
+    <widget class="QFrame" name="frame_menu">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>230</width>
+       <height>301</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">/* ==========================================================================
+   PANEL PRINCIPAL (Estilo Cofre de Bronce/Madera)
+   ========================================================================== */
+QFrame#frame_menu {
+    background-color: rgba(62, 50, 41, 0.85); /* Marrón oscuro translúcido */
+    border: 3px double #8c6a46;               /* Doble borde simulando relieve de bronce */
+    border-radius: 14px;                       /* Esquinas suavizadas */
+}
+
+/* ==========================================================================
+   TEXTOS (Ángulo y Fuerza)
+   ========================================================================== */
+QLabel {
+    color: #dfb175;                           /* Dorado viejo/Bronce brillante */
+    font-family: &quot;Palatino Linotype&quot;, &quot;Georgia&quot;, serif; /* Tipografía clásica */
+    font-size: 15px;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+}
+
+/* ==========================================================================
+   CAJAS NUMÉRICAS (QSpinBox)
+   ========================================================================== */
+QSpinBox {
+    background-color: #2b2017;                /* Fondo interno oscuro */
+    color: #ebdcb9;                           /* Texto crema */
+    border: 2px solid #5c4531;                /* Borde café */
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px;
+    min-height: 25px;
+}
+
+/* Botones de subir y bajar del SpinBox */
+QSpinBox::up-button, QSpinBox::down-button {
+    background-color: #4a3828;
+    border-left: 1px solid #5c4531;
+    width: 18px;
+}
+
+QSpinBox::up-button:hover, QSpinBox::down-button:hover {
+    background-color: #73573f;
+}
+
+/* ==========================================================================
+   BARRAS DESLIZANTES (QSlider Horizontal)
+   ========================================================================== */
+QSlider::groove:horizontal {
+    border: 1px solid #5c4531;
+    height: 6px;
+    background: #2b2017;
+    border-radius: 3px;
+}
+
+/* El indicador redondo que arrastras */
+QSlider::handle:horizontal {
+    background: qradialgradient(cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 #b88d5c, stop:1 #5c4531);
+    border: 1px solid #1f1610;
+    width: 16px;
+    height: 16px;
+    margin: -5px 0;
+    border-radius: 8px;
+}
+
+QSlider::handle:horizontal:hover {
+    background: #dfb175;                      /* Brilla al pasar el cursor */
+}
+
+/* ==========================================================================
+   BOTÓN DE LANZAMIENTO (¡LANZAR!)
+   ========================================================================== */
+QPushButton#pushButton_lanzar {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #5c371e, stop:1 #3d2312); /* Degradado madera */
+    color: #ebdcb9;
+    font-family: &quot;Palatino Linotype&quot;, &quot;Georgia&quot;, serif;
+    font-size: 16px;
+    font-weight: bold;
+    border: 2px solid #8c6a46;                /* Marco de bronce */
+    border-radius: 8px;
+    padding: 8px 16px;
+    min-height: 30px;
+}
+
+QPushButton#pushButton_lanzar:hover {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #7d4b29, stop:1 #5c371e); /* Se aclara */
+    border-color: #dfb175;                    /* Borde resalta en dorado */
+    color: #ffffff;
+}
+
+QPushButton#pushButton_lanzar:pressed {
+    background-color: #2b170b;                /* Efecto hundido */
+    padding-top: 10px;                        /* Desplazamiento visual de presión */
+}</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <widget class="QPushButton" name="pushButton_lanzar">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>230</y>
+        <width>171</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>¡LANZAR!</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>14</x>
+        <y>14</y>
+        <width>111</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ANGULO</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="horizontalSlider_angulo">
+      <property name="geometry">
+       <rect>
+        <x>14</x>
+        <y>87</y>
+        <width>191</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBox_angulo">
+      <property name="geometry">
+       <rect>
+        <x>14</x>
+        <y>41</y>
+        <width>191</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>137</width>
+        <height>37</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>14</x>
+        <y>130</y>
+        <width>60</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>FUERZA</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="horizontalSlider2_fuerza">
+      <property name="geometry">
+       <rect>
+        <x>14</x>
+        <y>203</y>
+        <width>191</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBox2_fuerza">
+      <property name="geometry">
+       <rect>
+        <x>14</x>
+        <y>157</y>
+        <width>191</width>
+        <height>40</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </widget>
   </widget>
   <widget class="QGraphicsView" name="graphicsView">
    <property name="geometry">
@@ -387,5 +592,38 @@ li.checked::marker { content: &quot;\2612&quot;; }
  <resources>
   <include location="imagenes.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>horizontalSlider_angulo</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBox_angulo</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>59</x>
+     <y>167</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>66</x>
+     <y>152</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider2_fuerza</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBox2_fuerza</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>93</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>105</x>
+     <y>276</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

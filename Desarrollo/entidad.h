@@ -6,11 +6,20 @@
 class entidad : public QGraphicsPixmapItem
 {
     private:
+        // Variables para la posicion de la entidad
         int x;
         int y;
 
+        // Variables para la velocidad de la entidad
         int velocidad_x;
         int veloccidad_y;
+
+        // Variables para el sprite de la entidad
+        QPixmap spriteSheet;
+        int alto_frame;
+        int ancho_frame;
+        int frame_actual;
+        int total_frames;
 
     public:
         entidad(int x_inicio = 0, int y_inicio = 0);
@@ -23,8 +32,11 @@ class entidad : public QGraphicsPixmapItem
 
         // Metodos
         void actualizar_posicion();
-        void cargar_sprite(const QString &path);
         bool esta_vivo();
+
+        // Metodo para cargar el sprite de la entidad
+        void cargar_sprite(const QString &path, int ancho, int alto, int cantidad_frames);
+        void actualizar_sprite();
 };
 
 #endif // ENTIDAD_H
