@@ -9,7 +9,7 @@ class entidad : public QGraphicsPixmapItem
     private:
         // Variables para la velocidad de la entidad
         int velocidad_x;
-        int veloccidad_y;
+        int velocidad_y;
 
         // Variables para el sprite de la entidad
         QPixmap spriteSheet;

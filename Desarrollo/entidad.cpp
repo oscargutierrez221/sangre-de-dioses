@@ -4,7 +4,7 @@
 entidad::entidad(int x_inicio, int y_inicio)
 {
     velocidad_x = 0;
-    veloccidad_y = 0;
+    velocidad_y = 0;
 
     setPos(x_inicio, y_inicio);
 
@@ -17,12 +17,12 @@ entidad::entidad(int x_inicio, int y_inicio)
 void entidad::set_velocidad(int vx, int vy)
 {
     velocidad_x = vx;
-    veloccidad_y = vy;
+    velocidad_y = vy;
 }
 
 void entidad::actualizar_posicion()
 {
-    setPos(x() + velocidad_x, y() + veloccidad_y);
+    setPos(x() + velocidad_x, y() + velocidad_y);
 }
 
 void entidad::set_inicios_frames(std::vector<int> inicios)
