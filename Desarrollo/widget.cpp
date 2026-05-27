@@ -9,6 +9,9 @@ Widget::Widget(QWidget *parent)
     , ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    zeuz = nullptr;
+    lanza_zeuz = nullptr;
+    timerJuego = new QTimer(this);
 
     // Configuracion escenas
     setWindowTitle("Sangre de Dioses");
@@ -24,6 +27,13 @@ Widget::Widget(QWidget *parent)
 Widget::~Widget()
 {
     delete ui;
+}
+
+void Widget::actualizar_juego(){
+    // Actualizar lanzas
+    if (lanza_zeuz != nullptr && lanza_zeuz->esta_en_vuelo()) {
+        lanza_zeuz->mover();
+    }
 }
 
 void Widget::on_pushButton_clicked()
@@ -59,14 +69,10 @@ void Widget::on_pushButton_clicked()
     zeuz->set_inicios_frames({57, 301, 516, 720, 936});
     zeuz->cargar_sprite(":/new/sprite_personajes/Material/SEUZ_sprite.png", 161, 228, 5); // ancho=161 (el frame mas ancho), alto=228, 5 frames
 
-    // 2. Temporizador para la velocidad del sprite
-    timerJuego = new QTimer(this);
-    connect(timerJuego, &QTimer::timeout, this, [this]() {
-        zeuz->actualizar_sprite();
-    });
-
-    // // 3. Velocidad del sprite
-    // timerJuego->start(800);
+    // 2. Timer del juego: solo mueve la lanza y lógica general
+    disconnect(timerJuego, nullptr, this, nullptr);
+    connect(timerJuego, &QTimer::timeout, this, &Widget::actualizar_juego);
+    timerJuego->start(30);
 
 }
 
@@ -150,25 +156,42 @@ void Widget::on_pushButton_4_clicked()
 
 void Widget::on_pushButton_lanzar_clicked()
 {
+    if (zeuz == nullptr || timerJuego == nullptr) {
+        return;
+    }
+
     // 1. Capturamos los datos del menú estético
     int angulo = ui->spinBox_angulo->value();
     int fuerza = ui->spinBox2_fuerza->value();
 
 
-    // 2. Evitamos conexiones repetidas del mismo timer
+    // 2. Pausamos la actualizacion del juego para reproducir ataque
     disconnect(timerJuego, nullptr, this, nullptr);
 
-    // 3. Creamos una conexion para controlar la animacion del ataque de Zeus
+    // 3. Animacion de ataque (solo 3 frames del personaje)
     connect(timerJuego, &QTimer::timeout, this, [this]() {
-        // Ejecuta la animación.
-        if (zeuz->actualizar_sprite(6) == true) {
-            timerJuego->stop();
+        if (zeuz->actualizar_sprite(3) == true) {
+            disconnect(timerJuego, nullptr, this, nullptr);
+            connect(timerJuego, &QTimer::timeout, this, &Widget::actualizar_juego);
         }
     });
+    timerJuego->start(170);
 
-    // 4. Iniciamos el temporizador para la animación del ataque de Zeus
-    timerJuego->start(170); // Entre menor sea el valor mas rapdo es el sprite
+    // 4. Creamos la lanza si no existe, o la reutilizamos si ya existia
+    if (lanza_zeuz == nullptr)
+    {
+        lanza_zeuz = new proyectil();
+        nivel1->addItem(lanza_zeuz);
+    }
 
-    // 5. Sigue implementar la gabalina
+    // 4. Ponemos la lanza en la posicion del personaje
+    lanza_zeuz->setPos(zeuz->x() + 60, zeuz->y());
+
+    // 5. Le cargamos el sprote de la lanza
+    QPixmap sprite_lanza_zeuz(":/new/objetos/Material/lanza_zeuz.png");
+    lanza_zeuz->setPixmap(sprite_lanza_zeuz);
+
+    // 6. Le damos el angulo y la fuerza para que salga volando
+    lanza_zeuz->lanzar(angulo, fuerza);
 }
 

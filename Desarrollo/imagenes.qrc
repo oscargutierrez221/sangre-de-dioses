@@ -12,4 +12,7 @@
     <qresource prefix="/new/sprite_personajes">
         <file>Material/SEUZ_sprite.png</file>
     </qresource>
+    <qresource prefix="/new/objetos">
+        <file>Material/lanza_zeuz.png</file>
+    </qresource>
 </RCC>

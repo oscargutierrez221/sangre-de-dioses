@@ -9,12 +9,19 @@ class proyectil : public entidad
         float fuerza_inicial;
         float fuerza_final;
 
+        // Para saber si la lanza fue lanzada ya
+        bool en_vuelo;
+
     public:
         proyectil();
-        void calcular_trayectoria();
-        void calular_impacto();
-};
 
-// Faltan implementar las clases hijas jabalin y proyectil divino de artemisa que le puse simplemente flecha
+        // Lanza
+        void lanzar(float angulo_lanzamiento, float fuerza_lanzamiento);
+        void mover();
+        bool esta_en_vuelo();
+
+        void calcular_trayectoria();
+        void calcular_impacto();
+};
 
 #endif // PROYECTIL_H

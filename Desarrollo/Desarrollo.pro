@@ -15,6 +15,7 @@ SOURCES += \
     jugador.cpp \
     loki.cpp \
     main.cpp \
+    motor_fisico.cpp \
     muerdago.cpp \
     objetivo.cpp \
     obstaculo.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     heroe.h \
     jugador.h \
     loki.h \
+    motor_fisico.h \
     muerdago.h \
     objetivo.h \
     obstaculo.h \

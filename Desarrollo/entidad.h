@@ -7,10 +7,6 @@
 class entidad : public QGraphicsPixmapItem
 {
     private:
-        // Variables para la posicion de la entidad
-        int x;
-        int y;
-
         // Variables para la velocidad de la entidad
         int velocidad_x;
         int veloccidad_y;
@@ -26,7 +22,7 @@ class entidad : public QGraphicsPixmapItem
     public:
         entidad(int x_inicio = 0, int y_inicio = 0);
 
-        // getters y setters para x,y
+        // getters y setters
         void set_velocidad(int vx, int vy);
 
         int set_fuerza_lanzamiento();

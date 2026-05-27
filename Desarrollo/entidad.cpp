@@ -3,13 +3,10 @@
 
 entidad::entidad(int x_inicio, int y_inicio)
 {
-    x = x_inicio;
-    y = y_inicio;
-
     velocidad_x = 0;
     veloccidad_y = 0;
 
-    setPos(x, y);
+    setPos(x_inicio, y_inicio);
 
     frame_actual = 0;
     total_frames = 0;
@@ -25,10 +22,7 @@ void entidad::set_velocidad(int vx, int vy)
 
 void entidad::actualizar_posicion()
 {
-    x += velocidad_x;
-    y += veloccidad_y;
-
-    setPos(x, y);
+    setPos(x() + velocidad_x, y() + veloccidad_y);
 }
 
 void entidad::set_inicios_frames(std::vector<int> inicios)

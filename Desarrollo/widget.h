@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
 #include  "entidad.h"
+#include  "proyectil.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -32,15 +33,21 @@ private slots:
 
     void on_pushButton_lanzar_clicked();
 
+    void actualizar_juego();
+
 private:
+    // Elementos gráficos
     Ui::Widget *ui;
     QGraphicsScene *nivel1;
     QGraphicsPixmapItem *fondo1;
 
-    // Configuracion sprite
-    QTimer *timerJuego;  // El temporizador para controlar el bucle de movimiento
+    // Temporizadores
+    QTimer *timerJuego;
 
     // Configuracion personajes
     entidad *zeuz;
+
+    // Configuracion lanzas
+    proyectil *lanza_zeuz;
 };
 #endif // WIDGET_H
