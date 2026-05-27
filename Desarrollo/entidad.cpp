@@ -31,34 +31,54 @@ void entidad::actualizar_posicion()
     setPos(x, y);
 }
 
+void entidad::set_inicios_frames(std::vector<int> inicios)
+{
+    inicios_frames = inicios;
+}
+
 void entidad::cargar_sprite(const QString &path, int ancho, int alto, int cantidad_frames) {
-    // 1. Cargamos la imagen desde la ruta de Resources
     spriteSheet = QPixmap(path);
 
-    // 2. Guardamos las dimensiones del sprite
     ancho_frame = ancho;
     alto_frame = alto;
     total_frames = cantidad_frames;
     frame_actual = 0;
 
-    // 3. Mostramos el primer frame
-    actualizar_sprite();
+    // Mostramos el primer frame (quieto)
+    if (!spriteSheet.isNull() && total_frames > 0 && ancho_frame > 0 && alto_frame > 0) {
+        int inicio = (inicios_frames.size() > 0) ? inicios_frames[0] : 0;
+        setPixmap(spriteSheet.copy(inicio, 0, ancho_frame, alto_frame));
+    }
 }
 
-void entidad::actualizar_sprite() {
-    if (total_frames <= 0) {
-        return;
+bool entidad::actualizar_sprite(int frames_animacion) {
+    if (spriteSheet.isNull() || total_frames <= 0 || ancho_frame <= 0 || alto_frame <= 0) {
+        return true;
     }
 
-    // 1. Calcular donde empieza el frame actual
-    int posicion_x = frame_actual * ancho_frame;
+    int limite = total_frames;
+    if (frames_animacion > 0 && frames_animacion < total_frames) {
+        limite = frames_animacion;
+    }
 
-    // 2. Recortamos el rectangulo exacto del frame
-    QPixmap frame_Recortado = spriteSheet.copy(posicion_x, 0, ancho_frame, alto_frame);
+    // Calculamos el inicio X de este frame
+    int inicio = 0;
+    if (frame_actual < (int)inicios_frames.size()) {
+        inicio = inicios_frames[frame_actual];
+    }
 
-    // 3. Le asignamos al QGraphicsPixmapItem el frame recortado
-    setPixmap(frame_Recortado);
+    // Dibujamos el frame actual en su posicion exacta
+    setPixmap(spriteSheet.copy(inicio, 0, ancho_frame, alto_frame));
 
-    // 4. Avanzamos al siguiente frame
-    frame_actual = (frame_actual + 1) % total_frames;
+    // Avanzamos al siguiente frame
+    frame_actual++;
+
+    if (frame_actual >= limite) {
+        frame_actual = 0;
+        int inicio0 = (inicios_frames.size() > 0) ? inicios_frames[0] : 0;
+        setPixmap(spriteSheet.copy(inicio0, 0, ancho_frame, alto_frame));
+        return true;
+    }
+
+    return false;
 }

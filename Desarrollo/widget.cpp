@@ -55,7 +55,9 @@ void Widget::on_pushButton_clicked()
     zeuz->setPos(150, 210);
     nivel1->addItem(zeuz);
 
-    zeuz->cargar_sprite(":/new/sprite_personajes/Material/SEUZ_sprite.png", 99, 200, 4); // Sprite, ancho, alto, cantidad de frames
+    // Posicion exacta donde empieza cada frame en el sprite (medido en pixeles)
+    zeuz->set_inicios_frames({57, 301, 516, 720, 936});
+    zeuz->cargar_sprite(":/new/sprite_personajes/Material/SEUZ_sprite.png", 161, 228, 5); // ancho=161 (el frame mas ancho), alto=228, 5 frames
 
     // 2. Temporizador para la velocidad del sprite
     timerJuego = new QTimer(this);
@@ -63,8 +65,8 @@ void Widget::on_pushButton_clicked()
         zeuz->actualizar_sprite();
     });
 
-    // 3. Velocidad del sprite
-    timerJuego->start(800);
+    // // 3. Velocidad del sprite
+    // timerJuego->start(800);
 
 }
 
@@ -148,14 +150,25 @@ void Widget::on_pushButton_4_clicked()
 
 void Widget::on_pushButton_lanzar_clicked()
 {
-        // El botón va por su cuenta y mira qué número hay guardado en la interfaz justo ahora:
-        int angulo = ui->spinBox_angulo->value();
-        int fuerza = ui->spinBox2_fuerza->value();
+    // 1. Capturamos los datos del menú estético
+    int angulo = ui->spinBox_angulo->value();
+    int fuerza = ui->spinBox2_fuerza->value();
 
-        QMessageBox::information(this, "Lanzamiento", QString("Ángulo: %1 grados\nFuerza: %2").arg(angulo).arg(fuerza));
 
-        // Aquí es donde nacerá el proyectil (la jabalina) en la escena:
-        // proyectil = new entidad();
-        // proyectil->lanzar(angulo, fuerza);
+    // 2. Evitamos conexiones repetidas del mismo timer
+    disconnect(timerJuego, nullptr, this, nullptr);
+
+    // 3. Creamos una conexion para controlar la animacion del ataque de Zeus
+    connect(timerJuego, &QTimer::timeout, this, [this]() {
+        // Ejecuta la animación.
+        if (zeuz->actualizar_sprite(6) == true) {
+            timerJuego->stop();
+        }
+    });
+
+    // 4. Iniciamos el temporizador para la animación del ataque de Zeus
+    timerJuego->start(170); // Entre menor sea el valor mas rapdo es el sprite
+
+    // 5. Sigue implementar la gabalina
 }
 

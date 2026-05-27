@@ -2,6 +2,7 @@
 #define ENTIDAD_H
 #include <QGraphicsPixmapItem>
 #include <QString>
+#include <vector>
 
 class entidad : public QGraphicsPixmapItem
 {
@@ -20,6 +21,7 @@ class entidad : public QGraphicsPixmapItem
         int ancho_frame;
         int frame_actual;
         int total_frames;
+        std::vector<int> inicios_frames;
 
     public:
         entidad(int x_inicio = 0, int y_inicio = 0);
@@ -36,7 +38,8 @@ class entidad : public QGraphicsPixmapItem
 
         // Metodo para cargar el sprite de la entidad
         void cargar_sprite(const QString &path, int ancho, int alto, int cantidad_frames);
-        void actualizar_sprite();
+        void set_inicios_frames(std::vector<int> inicios);
+        bool actualizar_sprite(int frames_animacion = -1);
 };
 
 #endif // ENTIDAD_H
