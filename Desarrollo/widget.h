@@ -44,10 +44,17 @@ private:
     // Temporizadores
     QTimer *timerJuego;
 
-    // Configuracion personajes
+    // Configuracion personajes (0=Zeus, 1=Poseidon, 2=Hades, 3=Ares)
+    int personaje_elegido;
     entidad *zeuz;
+    entidad *poseidon;
+    entidad *hades;
+    entidad *ares;
 
     // Configuracion lanzas
     proyectil *lanza_zeuz;
+    proyectil *lanza_poseidon;
+    proyectil *lanza_hades;
+    proyectil *lanza_ares;
 };
 #endif // WIDGET_H

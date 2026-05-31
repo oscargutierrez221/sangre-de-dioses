@@ -1,7 +1,7 @@
 #include "motor_fisico.h"
 
 motor_fisico::motor_fisico() {
-    gravedad = 0.3;
+    gravedad = 2.0;
 }
 
 double motor_fisico::sen(double x){

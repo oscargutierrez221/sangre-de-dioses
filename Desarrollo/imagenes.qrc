@@ -11,8 +11,17 @@
     </qresource>
     <qresource prefix="/new/sprite_personajes">
         <file>Material/SEUZ_sprite.png</file>
+        <file>Material/poseidon_sprite.png</file>
+        <file>Material/hades_sprite.png</file>
+        <file>Material/ares_sprite.png</file>
     </qresource>
-    <qresource prefix="/new/objetos">
+    <qresource prefix="/new/lanzas">
         <file>Material/lanza_zeuz.png</file>
+        <file>Material/lanza_poseidon.png</file>
+        <file>Material/lanza_hades.png</file>
+        <file>Material/lanza_ares.png</file>
+    </qresource>
+    <qresource prefix="/new/obstaculos">
+        <file>Material/escudo_sprite.png</file>
     </qresource>
 </RCC>

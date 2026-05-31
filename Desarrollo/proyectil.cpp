@@ -9,6 +9,9 @@ proyectil::proyectil()
     en_vuelo = false;
     vel_x = 0;
     vel_y = 0;
+
+    pos_x = 0;
+    pos_y = 0;
 }
 
 void proyectil::lanzar(float angulo_lanzamiento, float fuerza_lanzamiento)
@@ -16,6 +19,9 @@ void proyectil::lanzar(float angulo_lanzamiento, float fuerza_lanzamiento)
     angulo = angulo_lanzamiento;
     fuerza_inicial = fuerza_lanzamiento;
     en_vuelo = true;
+
+    pos_x = x();
+    pos_y = y();
 
     motor.calcular_velocidad_inicial(angulo, fuerza_lanzamiento, vel_x, vel_y);
 }
@@ -26,12 +32,13 @@ void proyectil::mover()
         // Primero aplicamos la gravedad
         motor.aplicar_gravedad(vel_y);
 
-        // Movemos la lanza segun las velocidades iniciales
-        set_velocidad((int) vel_x, (int) vel_y);
-        actualizar_posicion();
+        pos_x += vel_x;
+        pos_y += vel_y;
+
+        setPos(pos_x, pos_y);
 
         // Si la lanza se sale de la pantalla, la detenemos
-        if (x() > 1376 || x() < 0 || y() > 768 || y() < 0) {
+        if (x() > 1376 || x() < 0 || y() > 2000 || y() < 0) {
             en_vuelo = false;
         }
     }

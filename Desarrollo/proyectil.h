@@ -17,6 +17,9 @@ class proyectil : public entidad
         float vel_x;
         float vel_y;
 
+        float pos_x;
+        float pos_y;
+
         // Un objeto para el motor fisico
         motor_fisico motor;
 
