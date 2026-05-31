@@ -4,8 +4,10 @@
 #include <QWidget>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
-#include  "entidad.h"
-#include  "proyectil.h"
+#include <vector>
+#include "entidad.h"
+#include "proyectil.h"
+#include "obstaculo.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -56,5 +58,15 @@ private:
     proyectil *lanza_poseidon;
     proyectil *lanza_hades;
     proyectil *lanza_ares;
+
+    // Configuracion de los obstaculos
+    std::vector<obstaculo*> obstaculos; // Lista par alos obstaculos que pongamos en la pantaalla
+
+    entidad *explosion_borde;
+
+    void cargar_obstaculos();
+    void revisar_colisiones(proyectil *lanza);
+    void destruir_lanza(proyectil *&lanza, float pos_x, float pos_y);
+
 };
 #endif // WIDGET_H

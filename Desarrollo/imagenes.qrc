@@ -23,5 +23,6 @@
     </qresource>
     <qresource prefix="/new/obstaculos">
         <file>Material/escudo_sprite.png</file>
+        <file>Material/explosion_sprite.png</file>
     </qresource>
 </RCC>

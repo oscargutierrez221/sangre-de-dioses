@@ -1,8 +1,8 @@
 #ifndef BALDUR_H
 #define BALDUR_H
-#include "personaje.h"
+#include "entidad.h"
 
-class baldur : public personaje
+class baldur : public entidad
 {
     private:
         bool es_invulnerable;

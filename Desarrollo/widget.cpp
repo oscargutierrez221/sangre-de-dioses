@@ -10,15 +10,20 @@ Widget::Widget(QWidget *parent)
 {
     ui->setupUi(this);
     personaje_elegido = -1;
+
     zeuz = nullptr;
     poseidon = nullptr;
     hades = nullptr;
     ares = nullptr;
+
     lanza_zeuz = nullptr;
     lanza_poseidon = nullptr;
     lanza_hades = nullptr;
     lanza_ares = nullptr;
+
     timerJuego = new QTimer(this);
+
+    explosion_borde = nullptr;
 
     // Configuracion escenas
     setWindowTitle("Sangre de Dioses");
@@ -61,6 +66,16 @@ void Widget::actualizar_juego(){
         if (lanza != nullptr && lanza->esta_en_vuelo()) {
         lanza->mover();
     }
+
+    for (obstaculo* en_pantalla : obstaculos) {
+        if (en_pantalla->explotando && en_pantalla->termino_explosion()) {
+            en_pantalla->reiniciar();
+        } else if (!en_pantalla->explotando) {
+            en_pantalla->mover();
+        }
+    }
+
+    revisar_colisiones(lanza);
 }
 
 void Widget::on_pushButton_clicked()
@@ -100,6 +115,8 @@ void Widget::on_pushButton_clicked()
     disconnect(timerJuego, nullptr, this, nullptr);
     connect(timerJuego, &QTimer::timeout, this, &Widget::actualizar_juego);
     timerJuego->start(30);
+
+    cargar_obstaculos();
 }
 
 
@@ -142,6 +159,8 @@ void Widget::on_pushButton_2_clicked()
     disconnect(timerJuego, nullptr, this, nullptr);
     connect(timerJuego, &QTimer::timeout, this, &Widget::actualizar_juego);
     timerJuego->start(30);
+
+    cargar_obstaculos();
 }
 
 
@@ -184,6 +203,8 @@ void Widget::on_pushButton_3_clicked()
     connect(timerJuego, &QTimer::timeout, this, &Widget::actualizar_juego);
     timerJuego->start(30);
 
+    cargar_obstaculos();
+
 }
 
 void Widget::on_pushButton_4_clicked()
@@ -224,6 +245,8 @@ void Widget::on_pushButton_4_clicked()
     disconnect(timerJuego, nullptr, this, nullptr);
     connect(timerJuego, &QTimer::timeout, this, &Widget::actualizar_juego);
     timerJuego->start(30);
+
+    cargar_obstaculos();
 }
 
 void Widget::on_pushButton_lanzar_clicked()
@@ -277,6 +300,7 @@ void Widget::on_pushButton_lanzar_clicked()
         if (personaje->actualizar_sprite(frames_ataque) == true) {
             disconnect(timerJuego, nullptr, this, nullptr);
             connect(timerJuego, &QTimer::timeout, this, &Widget::actualizar_juego);
+            timerJuego->start(30);
         }
     });
     timerJuego->start(170);
@@ -349,3 +373,131 @@ void Widget::on_pushButton_lanzar_clicked()
     lanza->lanzar(angulo, fuerza);
 }
 
+void Widget::cargar_obstaculos()
+{
+    for(obstaculo* en_pantalla : obstaculos) {
+        en_pantalla->destruirse();
+        delete en_pantalla;
+    }
+    obstaculos.clear(); // Liberams los obstaculos que hayan quedado para evitar errores
+
+    float posiciones_x[] = {300, 450, 600, 750, 900};
+    const float y_min = 130.0;
+    const float y_max = 520.0;
+    float velocidades[] = {3.0, 3.8, 4.2, 3.4, 4.0};
+
+    for (int i = 0; i < 5; i++) {
+        obstaculo *en_pantalla = new obstaculo();
+        en_pantalla->set_inicios_frames({0});
+        en_pantalla->cargar_sprite(":/new/obstaculos/Material/escudo_sprite.png", 260, 280, 1);
+        en_pantalla->setScale(0.55);
+
+        float y_inicio = y_min + (y_max - y_min) * i / 4.0f;
+        en_pantalla->colocar(posiciones_x[i], y_inicio);
+        en_pantalla->configurar_movimiento(i % 2 == 1, velocidades[i]);
+
+        nivel1->addItem(en_pantalla);
+        obstaculos.push_back(en_pantalla);
+    }
+
+    explosion_borde = nullptr;
+}
+
+void Widget::destruir_lanza(proyectil *&lanza, float pos_x, float pos_y)
+{
+    if (lanza != nullptr) { // Si la lanza existe, la destruimos y eliminamos de la escena
+        nivel1->removeItem(lanza);
+        delete lanza;
+        lanza = nullptr;
+    }
+
+    if (explosion_borde != nullptr) { // De la misma forma, si existe la explosion del borde, la eliminamos
+        nivel1->removeItem(explosion_borde);
+        delete explosion_borde;
+    }
+
+    // Creamos una una explosion cuando la lanza golpee algo
+    explosion_borde = new entidad();
+    explosion_borde->setPos(pos_x, pos_y);
+    nivel1->addItem(explosion_borde);
+
+    explosion_borde->set_inicios_frames({0, 100, 200, 300});
+    explosion_borde->cargar_sprite(":/new/obstaculos/Material/explosion_sprite.png", 100 , 100 , 4);
+
+    QTimer *tiempo_explosion = new QTimer(this);
+    connect(tiempo_explosion, &QTimer::timeout, this, [this, tiempo_explosion]() {
+        if (explosion_borde != nullptr) {
+            bool termino = explosion_borde->actualizar_sprite(4);
+            if (termino) {
+                nivel1->removeItem(explosion_borde);
+                delete explosion_borde;
+                explosion_borde = nullptr;
+                tiempo_explosion->stop();
+                tiempo_explosion->deleteLater();
+            }
+        }
+    });
+    tiempo_explosion->start(80);
+
+}
+
+void Widget::revisar_colisiones(proyectil *lanza)
+{
+    if (lanza == nullptr || !lanza->esta_en_vuelo()) {
+        return;
+    }
+
+    // Si la lanza choca conun borde
+    if (lanza->x() > 1376 || lanza->x() < 0 || lanza->y() > 2000 || lanza->y() < 0) {
+        float px = lanza->x();
+        float py = lanza->y();
+
+        switch (personaje_elegido) {
+        case 0:
+            destruir_lanza(lanza_zeuz, px, py);
+            break;
+        case 1:
+            destruir_lanza(lanza_poseidon, px, py);
+            break;
+        case 2:
+            destruir_lanza(lanza_hades, px, py);
+            break;
+        case 3:
+            destruir_lanza(lanza_ares, px, py);
+            break;
+        default:
+            break;
+        }
+        return;
+    }
+
+    // Si la lanza choca con un obstaculo
+    for (obstaculo* en_pantalla :  obstaculos) {
+        if (en_pantalla->explotando) continue;
+
+        if (lanza->collidesWithItem(en_pantalla)) {
+            float px = lanza->x();
+            float py = lanza->y();
+
+            en_pantalla->explotar();
+
+            switch (personaje_elegido) {
+            case 0:
+                destruir_lanza(lanza_zeuz, px, py);
+                break;
+            case 1:
+                destruir_lanza(lanza_poseidon, px, py);
+                break;
+            case 2:
+                destruir_lanza(lanza_hades, px, py);
+                break;
+            case 3:
+                destruir_lanza(lanza_ares, px, py);
+                break;
+            default:
+                break;
+            }
+            return;
+            }
+        }
+}
