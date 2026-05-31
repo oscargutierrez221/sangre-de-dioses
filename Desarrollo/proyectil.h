@@ -1,6 +1,7 @@
 #ifndef PROYECTIL_H
 #define PROYECTIL_H
 #include "entidad.h"
+#include "motor_fisico.h"
 
 class proyectil : public entidad
 {
@@ -11,6 +12,13 @@ class proyectil : public entidad
 
         // Para saber si la lanza fue lanzada ya
         bool en_vuelo;
+
+        // Para la gravedad
+        float vel_x;
+        float vel_y;
+
+        // Un objeto para el motor fisico
+        motor_fisico motor;
 
     public:
         proyectil();

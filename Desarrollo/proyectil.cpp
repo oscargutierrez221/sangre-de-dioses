@@ -7,6 +7,8 @@ proyectil::proyectil()
     fuerza_inicial = 0;
     fuerza_final = 0;
     en_vuelo = false;
+    vel_x = 0;
+    vel_y = 0;
 }
 
 void proyectil::lanzar(float angulo_lanzamiento, float fuerza_lanzamiento)
@@ -15,24 +17,21 @@ void proyectil::lanzar(float angulo_lanzamiento, float fuerza_lanzamiento)
     fuerza_inicial = fuerza_lanzamiento;
     en_vuelo = true;
 
-    // Convertir el angulo de grados a radianes para poder usar coseno y seno
-    double angulo_en_radianes = angulo * 3.14159265 / 180.0;
-
-    // Calcular cuanto se mueve en X y Y
-    float velocidad = fuerza_lanzamiento * 1.0; // Para que no sea demasiado rapido
-
-    set_velocidad (velocidad * cos(angulo_en_radianes), velocidad * sin(angulo_en_radianes)); // El -  es porque n qt la Y crece hacia abajo
-
+    motor.calcular_velocidad_inicial(angulo, fuerza_lanzamiento, vel_x, vel_y);
 }
 
 void proyectil::mover()
 {
-    // Solo se tiene que mover si esta en vuelo
     if(en_vuelo){
+        // Primero aplicamos la gravedad
+        motor.aplicar_gravedad(vel_y);
+
+        // Movemos la lanza segun las velocidades iniciales
+        set_velocidad((int) vel_x, (int) vel_y);
         actualizar_posicion();
 
         // Si la lanza se sale de la pantalla, la detenemos
-        if (x() > 1080 || x() < 0 || y() > 600 || y() < 0) {
+        if (x() > 1376 || x() < 0 || y() > 768 || y() < 0) {
             en_vuelo = false;
         }
     }

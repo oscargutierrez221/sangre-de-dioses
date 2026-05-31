@@ -3,6 +3,9 @@
 
 class motor_fisico
 {
+private:
+    float gravedad;
+
 public:
 
     motor_fisico();
@@ -11,6 +14,9 @@ public:
     double sen(double x);
     double cos(double x);
 
+    void aplicar_gravedad(float &velocidad_y);
+    void calcular_velocidad_inicial(float angulo, float fuerza, float &velocidad_x, float &velocidad_y);
+
 };
 
-#endif //
+#endif // MOTOR_FISICO_H

@@ -189,7 +189,7 @@ void Widget::on_pushButton_lanzar_clicked()
 
     // 5. Le cargamos el sprote de la lanza
     QPixmap sprite_lanza_zeuz(":/new/objetos/Material/lanza_zeuz.png");
-    lanza_zeuz->setPixmap(sprite_lanza_zeuz);
+    lanza_zeuz->setPixmap(sprite_lanza_zeuz.scaled(96, 113, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     // 6. Le damos el angulo y la fuerza para que salga volando
     lanza_zeuz->lanzar(angulo, fuerza);
