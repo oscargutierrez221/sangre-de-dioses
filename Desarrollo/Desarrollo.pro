@@ -9,6 +9,7 @@ CONFIG += c++17
 SOURCES += \
     baldur.cpp \
     entidad.cpp \
+    gestor_combates.cpp \
     main.cpp \
     motor_fisico.cpp \
     obstaculo.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
 HEADERS += \
     baldur.h \
     entidad.h \
+    gestor_combates.h \
     motor_fisico.h \
     obstaculo.h \
     panel.h \
