@@ -49,12 +49,30 @@ bool proyectil::esta_en_vuelo()
     return en_vuelo;
 }
 
-void proyectil::calcular_trayectoria()
+void proyectil::preparar(QGraphicsScene *scena, float x_personaje, float y_personaje, QString ruta_sprite, int ancho, int alto, int offset_x, int offset_y)
 {
-    // Aquí se podría implementar la lógica para calcular la trayectoria del proyectil en función de la gravedad y el tiempo
+    // Si ya estaba en la escena la quitamos primero
+    if (scene()) {
+        scena->removeItem(this);
+    }
+
+    // 1. Cargamos el sprite de la lanza
+    QPixmap sprite(ruta_sprite);
+    setPixmap(sprite.scaled(ancho, alto, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
+    // 2. La posicionamos en el personaje
+    setPos(x_personaje + offset_x, y_personaje + offset_y);
+
+    // 3. La agregamos a la escena
+    scena->addItem(this);
+
+    en_vuelo = false;
 }
 
-void proyectil::calcular_impacto()
+void proyectil::destruir_de_escena()
 {
-    // Por implementar
+    en_vuelo = false;
+    if (scene()) {
+        scene()->removeItem(this);
+    }
 }

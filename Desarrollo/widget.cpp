@@ -41,6 +41,94 @@ Widget::~Widget()
     delete ui;
 }
 
+void Widget::iniciar_nivel(int personaje)
+{
+    personaje_elegido = personaje;
+
+    ui->stackedWidget_2->setCurrentIndex(1);
+    setWindowTitle("Nivel 1 - Juego de Baldur");
+
+    QPixmap mapa(":/new/Fondos/Material/fondoCombate.png");
+    nivel1 = new QGraphicsScene(mapa.rect(), this);
+    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->graphicsView->setScene(nivel1);
+
+    fondo1 = new QGraphicsPixmapItem(mapa);
+    fondo1->setPos(0, 0);
+    nivel1->addItem(fondo1);
+
+    // Configuramos el personaje segun cual eligio el jugador
+    switch (personaje_elegido) {
+    case 0:
+        QMessageBox::information(this, "Zeuz", "Haz elejido al Dios del rayo");
+        zeuz = new entidad();
+        zeuz->setPos(150, 210);
+        nivel1->addItem(zeuz);
+        zeuz->set_inicios_frames({57, 301, 516, 720, 936});
+        zeuz->cargar_sprite(":/new/sprite_personajes/Material/SEUZ_sprite.png", 161, 228, 5);
+        break;
+
+    case 1:
+        QMessageBox::information(this, "Poseidon", "Haz elejido al Dios de los mares");
+        poseidon = new entidad();
+        poseidon->setPos(150, 210);
+        nivel1->addItem(poseidon);
+        poseidon->set_inicios_frames({0, 269});
+        poseidon->set_anchos_frames({269, 344});
+        poseidon->cargar_sprite(":/new/sprite_personajes/Material/poseidon_sprite.png", 344, 407, 2);
+        poseidon->setScale(228.0 / 407.0);
+        break;
+
+    case 2:
+        QMessageBox::information(this, "Hades", "Haz elejido al Dios del inframundo");
+        hades = new entidad();
+        hades->setPos(150, 210);
+        nivel1->addItem(hades);
+        hades->set_inicios_frames({0, 290});
+        hades->set_anchos_frames({290, 323});
+        hades->cargar_sprite(":/new/sprite_personajes/Material/hades_sprite.png", 323, 407, 2);
+        hades->setScale(228.0 / 407.0);
+        break;
+
+    case 3:
+        QMessageBox::information(this, "Ares", "Haz elejido al Dios de la guerra");
+        ares = new entidad();
+        ares->setPos(150, 210);
+        nivel1->addItem(ares);
+        ares->set_inicios_frames({0, 229});
+        ares->set_anchos_frames({229, 384});
+        ares->cargar_sprite(":/new/sprite_personajes/Material/ares_sprite.png", 384, 407, 2);
+        ares->setScale(228.0 / 407.0);
+        break;
+    }
+
+    // Cargamos los obstaculos usando el metodo de la clase obstaculo
+    obstaculo::cargar_en_escena(nivel1, obstaculos);
+
+    disconnect(timerJuego, nullptr, this, nullptr);
+    connect(timerJuego, &QTimer::timeout, this, &Widget::actualizar_juego);
+    timerJuego->start(30);
+}
+
+void Widget::on_pushButton_clicked()
+{
+    iniciar_nivel(0);
+}
+void Widget::on_pushButton_2_clicked()
+{
+    iniciar_nivel(1);
+}
+void Widget::on_pushButton_3_clicked()
+{
+    iniciar_nivel(2);
+}
+void Widget::on_pushButton_4_clicked()
+{
+    iniciar_nivel(3);
+}
+
+
 void Widget::actualizar_juego(){
 
     proyectil *lanza = nullptr;
@@ -78,226 +166,70 @@ void Widget::actualizar_juego(){
     revisar_colisiones(lanza);
 }
 
-void Widget::on_pushButton_clicked()
-{
-    // Permite manipular las escenas y los elementos gráficos, como el fondo y los sprites de a cuerdo a la pagina
-    ui->stackedWidget_2->setCurrentIndex(1);
-
-    setWindowTitle("Nivel 1 - Juego de Baldur");
-
-    QPixmap mapa(":/new/Fondos/Material/fondoCombate.png");
-
-    // 1. Configuracion del fondo
-    nivel1 = new QGraphicsScene(mapa.rect(), this);
-
-    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->setScene(nivel1);
-
-    // 2. agregar el fondo a la escena
-    fondo1 = new QGraphicsPixmapItem(mapa);
-    fondo1->setPos(0, 0);
-    nivel1->addItem(fondo1);
-
-    // 3. Cargar sprite
-    QMessageBox::information(this, "Zeuz", "Haz elejido al Dios del rayo");
-
-    personaje_elegido = 0;
-    zeuz = new entidad();
-    zeuz->setPos(150, 210);
-    nivel1->addItem(zeuz);
-
-    // 4. Posicion exacta donde empieza cada frame en el sprite (medido en pixeles)
-    zeuz->set_inicios_frames({57, 301, 516, 720, 936});
-    zeuz->cargar_sprite(":/new/sprite_personajes/Material/SEUZ_sprite.png", 161, 228, 5); // ancho=161 (el frame mas ancho), alto=228, 5 frames
-
-    // 5. Timer del juego: solo mueve la lanza y lógica general
-    disconnect(timerJuego, nullptr, this, nullptr);
-    connect(timerJuego, &QTimer::timeout, this, &Widget::actualizar_juego);
-    timerJuego->start(30);
-
-    cargar_obstaculos();
-}
-
-
-void Widget::on_pushButton_2_clicked()
-{
-    // Permite manipular las escenas y los elementos gráficos, como el fondo y los sprites de a cuerdo a la pagina
-    ui->stackedWidget_2->setCurrentIndex(1);
-
-    setWindowTitle("Nivel 1 - Juego de Baldur");
-
-    QPixmap mapa(":/new/Fondos/Material/fondoCombate.png");
-
-    // 1. Configuracion del fondo
-    nivel1 = new QGraphicsScene(mapa.rect(), this);
-
-    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->setScene(nivel1);
-
-    // 2. agregar el fondo a la escena
-    fondo1 = new QGraphicsPixmapItem(mapa);
-    fondo1->setPos(0, 0);
-    nivel1->addItem(fondo1);
-
-    // 3. Cargar el sprite
-    QMessageBox::information(this, "Poseidon", "Haz elejido al Dios de los mares");
-
-    personaje_elegido = 1;
-    poseidon = new entidad();
-    poseidon->setPos(150, 210);
-    nivel1->addItem(poseidon);
-
-    // 4. Sprite 613x407: 2 frames horizontales de distinto ancho (269 y 344 px)
-    poseidon->set_inicios_frames({0, 269});
-    poseidon->set_anchos_frames({269, 344});
-    poseidon->cargar_sprite(":/new/sprite_personajes/Material/poseidon_sprite.png", 344, 407, 2);
-    poseidon->setScale(228.0 / 407.0);
-
-    // 5. Timer del juego
-    disconnect(timerJuego, nullptr, this, nullptr);
-    connect(timerJuego, &QTimer::timeout, this, &Widget::actualizar_juego);
-    timerJuego->start(30);
-
-    cargar_obstaculos();
-}
-
-
-void Widget::on_pushButton_3_clicked()
-{
-    // Permite manipular las escenas y los elementos gráficos, como el fondo y los sprites de a cuerdo a la pagina
-    ui->stackedWidget_2->setCurrentIndex(1);
-
-    setWindowTitle("Nivel 1 - Juego de Baldur");
-
-    QPixmap mapa(":/new/Fondos/Material/fondoCombate.png");
-
-    // 1. Configuracion del fondo
-    nivel1 = new QGraphicsScene(mapa.rect(), this);
-
-    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->setScene(nivel1);
-
-    // 2. agregar el fondo a la escena
-    fondo1 = new QGraphicsPixmapItem(mapa);
-    fondo1->setPos(0, 0);
-    nivel1->addItem(fondo1);
-
-    // 3. Cargar el sprite
-    QMessageBox::information(this, "Hades", "Haz elejido al Dios del inframundo");
-
-    personaje_elegido = 2;
-    hades = new entidad();
-    hades->setPos(150, 210);
-    nivel1->addItem(hades);
-
-    hades->set_inicios_frames({0, 290});
-    hades->set_anchos_frames({290, 323});
-    hades->cargar_sprite(":/new/sprite_personajes/Material/hades_sprite.png", 323, 407, 2);
-    hades->setScale(228.0 / 407.0);
-
-    // 5. Timer del juego
-    disconnect(timerJuego, nullptr, this, nullptr);
-    connect(timerJuego, &QTimer::timeout, this, &Widget::actualizar_juego);
-    timerJuego->start(30);
-
-    cargar_obstaculos();
-
-}
-
-void Widget::on_pushButton_4_clicked()
-{
-    // Permite manipular las escenas y los elementos gráficos, como el fondo y los sprites de a cuerdo a la pagina
-    ui->stackedWidget_2->setCurrentIndex(1);
-
-    setWindowTitle("Nivel 1 - Juego de Baldur");
-
-    QPixmap mapa(":/new/Fondos/Material/fondoCombate.png");
-
-    // 1. Configuracion del fondo
-    nivel1 = new QGraphicsScene(mapa.rect(), this);
-
-    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->setScene(nivel1);
-
-    // 2. agregar el fondo a la escena
-    fondo1 = new QGraphicsPixmapItem(mapa);
-    fondo1->setPos(0, 0);
-    nivel1->addItem(fondo1);
-
-    // 3. Cargar el sprite
-    QMessageBox::information(this, "Ares", "Haz elejido al Dios de la guerra");
-
-    personaje_elegido = 3;
-    ares = new entidad();
-    ares->setPos(150, 210);
-    nivel1->addItem(ares);
-
-    ares->set_inicios_frames({0, 229});
-    ares->set_anchos_frames({229, 384});
-    ares->cargar_sprite(":/new/sprite_personajes/Material/ares_sprite.png", 384, 407, 2);
-    ares->setScale(228.0 / 407.0);
-
-    // 5. Timer del juego
-    disconnect(timerJuego, nullptr, this, nullptr);
-    connect(timerJuego, &QTimer::timeout, this, &Widget::actualizar_juego);
-    timerJuego->start(30);
-
-    cargar_obstaculos();
-}
-
 void Widget::on_pushButton_lanzar_clicked()
 {
-    if (timerJuego == nullptr) {
-        return;
-    }
+    if (timerJuego == nullptr) return;
 
     entidad *personaje = nullptr;
     proyectil *lanza = nullptr;
     int frames_ataque = 0;
+    QString ruta_sprite;
+    int ancho = 96;
+    int alto = 113;
+    int offset_x = 60;
+    int offset_y = 0;
 
     switch (personaje_elegido) {
-        case 0:
-            personaje = zeuz;
-            lanza = lanza_zeuz;
-            frames_ataque = 5;
-            break;
-        case 1:
-            personaje = poseidon;
-            lanza = lanza_poseidon;
-            frames_ataque = 2;
-            break;
-        case 2:
-            personaje = hades;
-            lanza = lanza_hades;
-            frames_ataque = 2;
-            break;
-        case 3:
-            personaje = ares;
-            lanza = lanza_ares;
-            frames_ataque = 2;
-            break;
-        default:
-            return;
+    case 0:
+        personaje = zeuz;
+        lanza = lanza_zeuz;
+        frames_ataque = 5;
+        ruta_sprite = ":/new/lanzas/Material/lanza_zeuz.png";
+        break;
+    case 1:
+        personaje = poseidon;
+        lanza = lanza_poseidon;
+        frames_ataque = 2;
+        ruta_sprite = ":/new/lanzas/Material/lanza_poseidon.png";
+        ancho = 110;
+        alto = 130;
+        offset_x = 90;
+        offset_y = 30;
+        break;
+    case 2:
+        personaje = hades;
+        lanza = lanza_hades;
+        frames_ataque = 2;
+        ruta_sprite = ":/new/lanzas/Material/lanza_hades.png";
+        ancho = 110;
+        alto = 130;
+        offset_x = 90;
+        offset_y = 30;
+        break;
+    case 3:
+        personaje = ares;
+        lanza = lanza_ares;
+        frames_ataque = 2;
+        ruta_sprite = ":/new/lanzas/Material/lanza_ares.png";
+        ancho = 110;
+        alto = 130;
+        offset_x = 90;
+        offset_y = 30;
+        break;
+    default: return;
     }
 
-    if (personaje == nullptr) {
+    if (personaje == nullptr){
         return;
     }
 
-    // 1. Capturamos los datos del menú estético
     int angulo = ui->spinBox_angulo->value();
     int fuerza = ui->spinBox2_fuerza->value();
 
-    // 2. Pausamos la actualizacion del juego para reproducir ataque
+    // Animacion de ataque
     disconnect(timerJuego, nullptr, this, nullptr);
-
-    // 3. Animacion de ataque segun el personaje elegido
     connect(timerJuego, &QTimer::timeout, this, [this, personaje, frames_ataque]() {
-        if (personaje->actualizar_sprite(frames_ataque) == true) {
+        if (personaje->actualizar_sprite(frames_ataque)) {
             disconnect(timerJuego, nullptr, this, nullptr);
             connect(timerJuego, &QTimer::timeout, this, &Widget::actualizar_juego);
             timerJuego->start(30);
@@ -305,102 +237,19 @@ void Widget::on_pushButton_lanzar_clicked()
     });
     timerJuego->start(170);
 
-    // 4. Creamos la lanza si no existe
+    // Preparamos la lanza
     if (lanza == nullptr) {
         lanza = new proyectil();
-        nivel1->addItem(lanza);
-
         switch (personaje_elegido) {
-            case 0:
-                lanza_zeuz = lanza;
-                break;
-            case 1:
-                lanza_poseidon = lanza;
-                break;
-            case 2:
-                lanza_hades = lanza;
-                break;
-            case 3:
-                lanza_ares = lanza;
-                break;
-            default:
-                return;
+        case 0: lanza_zeuz = lanza; break;
+        case 1: lanza_poseidon = lanza; break;
+        case 2: lanza_hades = lanza; break;
+        case 3: lanza_ares = lanza; break;
         }
     }
 
-    // 5. Sprite y posicion de la lanza segun personaje
-    int set_x = 60;
-    int set_y = 0;
-    int ancho_lanza = 96;
-    int alto_lanza = 113;
-    QString ruta_lanza;
-
-    switch (personaje_elegido) {
-        case 0:
-            ruta_lanza = ":/new/lanzas/Material/lanza_zeuz.png";
-            break;
-        case 1:
-            ruta_lanza = ":/new/lanzas/Material/lanza_poseidon.png";
-            set_x = 90;
-            set_y = 30;
-            ancho_lanza = 110;
-            alto_lanza = 130;
-            break;
-        case 2:
-            ruta_lanza = ":/new/lanzas/Material/lanza_hades.png";
-            set_x = 90;
-            set_y = 30;
-            ancho_lanza = 110;
-            alto_lanza = 130;
-            break;
-        case 3:
-            ruta_lanza = ":/new/lanzas/Material/lanza_ares.png";
-            set_x = 90;
-            set_y = 30;
-            ancho_lanza = 110;
-            alto_lanza = 130;
-            break;
-        default:
-            return;
-        }
-
-    lanza->setPos(personaje->x() + set_x, personaje->y() + set_y);
-
-    QPixmap sprite_lanza(ruta_lanza);
-    lanza->setPixmap(sprite_lanza.scaled(ancho_lanza, alto_lanza, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-
-    // 6. Angulo y fuerza con fisicas
+    lanza->preparar(nivel1, personaje->x(), personaje->y(), ruta_sprite, ancho, alto, offset_x, offset_y);
     lanza->lanzar(angulo, fuerza);
-}
-
-void Widget::cargar_obstaculos()
-{
-    for(obstaculo* en_pantalla : obstaculos) {
-        en_pantalla->destruirse();
-        delete en_pantalla;
-    }
-    obstaculos.clear(); // Liberams los obstaculos que hayan quedado para evitar errores
-
-    float posiciones_x[] = {300, 450, 600, 750, 900};
-    const float y_min = 130.0;
-    const float y_max = 520.0;
-    float velocidades[] = {3.0, 3.8, 4.2, 3.4, 4.0};
-
-    for (int i = 0; i < 5; i++) {
-        obstaculo *en_pantalla = new obstaculo();
-        en_pantalla->set_inicios_frames({0});
-        en_pantalla->cargar_sprite(":/new/obstaculos/Material/escudo_sprite.png", 260, 280, 1);
-        en_pantalla->setScale(0.55);
-
-        float y_inicio = y_min + (y_max - y_min) * i / 4.0f;
-        en_pantalla->colocar(posiciones_x[i], y_inicio);
-        en_pantalla->configurar_movimiento(i % 2 == 1, velocidades[i]);
-
-        nivel1->addItem(en_pantalla);
-        obstaculos.push_back(en_pantalla);
-    }
-
-    explosion_borde = nullptr;
 }
 
 void Widget::destruir_lanza(proyectil *&lanza, float pos_x, float pos_y)

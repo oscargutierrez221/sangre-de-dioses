@@ -64,7 +64,7 @@ private:
 
     entidad *explosion_borde;
 
-    void cargar_obstaculos();
+    void iniciar_nivel(int personaje);
     void revisar_colisiones(proyectil *lanza);
     void destruir_lanza(proyectil *&lanza, float pos_x, float pos_y);
 

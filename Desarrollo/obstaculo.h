@@ -2,6 +2,8 @@
 #define OBSTACULO_H
 #include "entidad.h"
 #include <QTimer>
+#include <QGraphicsScene>
+#include <vector>
 
 class obstaculo : public entidad
 {
@@ -33,6 +35,9 @@ class obstaculo : public entidad
         void explotar();
         bool termino_explosion();
         void destruirse();
+
+        // Crea los 5 escudos y los mete en la escena y en el vector
+        static void cargar_en_escena(QGraphicsScene *escena, std::vector<obstaculo*> &lista);
 };
 
 #endif // OBSTACULO_H

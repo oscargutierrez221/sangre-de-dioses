@@ -2,6 +2,7 @@
 #define PROYECTIL_H
 #include "entidad.h"
 #include "motor_fisico.h"
+#include <QGraphicsScene>
 
 class proyectil : public entidad
 {
@@ -31,8 +32,9 @@ class proyectil : public entidad
         void mover();
         bool esta_en_vuelo();
 
-        void calcular_trayectoria();
-        void calcular_impacto();
+        void preparar(QGraphicsScene *scena, float x_personaje, float y_personaje, QString ruta_sprite, int ancho, int alto, int offset_x, int offset_y);
+
+        void destruir_de_escena();
 };
 
 #endif // PROYECTIL_H

@@ -105,3 +105,32 @@ void obstaculo::destruirse()
         scene()->removeItem(this);
     }
 }
+
+void obstaculo::cargar_en_escena(QGraphicsScene *escena, std::vector<obstaculo*> &lista)
+{
+    // Limpiamos todo lo que habia para evitar errores
+    for (obstaculo* en_pantalla : lista) {
+        en_pantalla->destruirse();
+        delete en_pantalla;
+    }
+    lista.clear();
+
+    float posiciones_x[] = {300, 450, 600, 750, 900};
+    float velocidades[] = {3.0, 3.8, 4.2, 3.4, 4.0};
+    const float y_min = 130.0;
+    const float y_max = 520.0;
+
+    for (int i = 0; i < 5; i++){
+        obstaculo *en_pantalla = new obstaculo();
+        en_pantalla->set_inicios_frames({0});
+        en_pantalla->cargar_sprite(":/new/obstaculos/Material/escudo_sprite.png", 260, 280, 1);
+        en_pantalla->setScale(0.55);
+
+        float y_inicio = y_min + (y_max - y_min) * i / 4.0f;
+        en_pantalla->colocar(posiciones_x[i], y_inicio);
+        en_pantalla->configurar_movimiento(i % 2 == 1, velocidades[i]);
+
+        escena->addItem(en_pantalla);
+        lista.push_back(en_pantalla);
+    }
+}
