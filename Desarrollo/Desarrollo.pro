@@ -11,8 +11,8 @@ SOURCES += \
     entidad.cpp \
     main.cpp \
     motor_fisico.cpp \
-    muerdago.cpp \
     obstaculo.cpp \
+    panel.cpp \
     proyectil.cpp \
     widget.cpp
 
@@ -20,8 +20,8 @@ HEADERS += \
     baldur.h \
     entidad.h \
     motor_fisico.h \
-    muerdago.h \
     obstaculo.h \
+    panel.h \
     proyectil.h \
     widget.h
 

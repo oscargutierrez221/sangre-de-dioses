@@ -9,6 +9,7 @@
 #include "proyectil.h"
 #include "obstaculo.h"
 #include "baldur.h"
+#include "panel.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -38,6 +39,14 @@ private slots:
 
     void actualizar_juego();
 
+    void turno_agente();
+
+    void fin_juego(bool gano_jugador, int pts_jugador, int pts_maquina);
+
+    void mostrar_muerdago();
+
+    void ocultar_muerdago();
+
 private:
     // Elementos gráficos
     Ui::Widget *ui;
@@ -54,12 +63,18 @@ private:
     entidad *hades;
     entidad *ares;
     baldur *baldur_ptr;
+    entidad *agente;
+    entidad *muerdago_sprite;
 
     // Configuracion lanzas
     proyectil *lanza_zeuz;
     proyectil *lanza_poseidon;
     proyectil *lanza_hades;
     proyectil *lanza_ares;
+    proyectil *lanza_agente;
+
+    // Panel
+    panel *panel_juego;
 
     // Configuracion de los obstaculos
     std::vector<obstaculo*> obstaculos; // Lista par alos obstaculos que pongamos en la pantaalla
@@ -67,8 +82,9 @@ private:
     entidad *explosion_borde;
 
     void iniciar_nivel(int personaje);
-    void revisar_colisiones(proyectil *lanza);
+    void revisar_colisiones(proyectil *lanza, bool es_maquina);
     void destruir_lanza(proyectil *&lanza, float pos_x, float pos_y);
+    void limpiar_nivel();
 
 };
 #endif // WIDGET_H

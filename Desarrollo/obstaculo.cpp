@@ -5,8 +5,6 @@
 
 obstaculo::obstaculo()
 {
-    dureza = 1;
-    tamanio = 60;
     velocidad_movimiento = 3.5;
 
     subiendo = false;
@@ -24,22 +22,27 @@ obstaculo::obstaculo()
 void obstaculo::mover()
 {
     // si esta explotando no se mueve
-    if(explotando){
+    if(explotando)
+    {
         return;
     }
 
-    if (subiendo){
+    if (subiendo)
+    {
         pos_y_actual -= velocidad_movimiento;
     }
-    else {
+    else
+    {
         pos_y_actual += velocidad_movimiento;
     }
 
-    if (pos_y_actual <= y_min) {
+    if (pos_y_actual <= y_min)
+    {
         pos_y_actual = y_min;
         subiendo = false;
     }
-    if (pos_y_actual >= y_max) {
+    if (pos_y_actual >= y_max)
+    {
         pos_y_actual = y_max;
         subiendo = true;
     }
@@ -81,11 +84,13 @@ void obstaculo::explotar()
     explotando = true;
     explosion_terminada = false;
 
-    cargar_sprite(":/new/obstaculos/Material/explosion_sprite.png", 100, 100, 4);
-    set_inicios_frames({0, 100, 200, 300});
+    set_inicios_frames({0, 226, 452, 678});
+    set_anchos_frames({226, 226, 226, 224});
+    cargar_sprite(":/new/obstaculos/Material/explosion_sprite.png", 226, 277, 4);
 
     QObject::disconnect(timer_explosion, nullptr, nullptr, nullptr);
-    QObject::connect(timer_explosion, &QTimer::timeout, [this]() {
+    QObject::connect(timer_explosion, &QTimer::timeout, [this]()
+    {
         if (actualizar_sprite(4)) {
             timer_explosion->stop();
             explosion_terminada = true;
@@ -101,7 +106,8 @@ bool obstaculo::termino_explosion()
 
 void obstaculo::destruirse()
 {
-    if (scene()) {
+    if (scene())
+    {
         scene()->removeItem(this);
     }
 }
@@ -109,7 +115,8 @@ void obstaculo::destruirse()
 void obstaculo::cargar_en_escena(QGraphicsScene *escena, std::vector<obstaculo*> &lista)
 {
     // Limpiamos todo lo que habia para evitar errores
-    for (obstaculo* en_pantalla : lista) {
+    for (obstaculo* en_pantalla : lista)
+    {
         en_pantalla->destruirse();
         delete en_pantalla;
     }

@@ -23,7 +23,8 @@ void baldur::cargar_en_escena(QGraphicsScene *escena)
 void baldur::animar()
 {
     contador_risa++;
-    if (contador_risa >= 15) {
+    if (contador_risa >= 15)
+    {
         contador_risa = 0;
         actualizar_sprite(2);
     }
@@ -32,7 +33,8 @@ void baldur::animar()
 void baldur::recibir_impacto()
 {
     lugar_actual = lugar_actual + 1;
-    if (lugar_actual > 3) {
+    if (lugar_actual > 3)
+    {
         lugar_actual = 0;
     }
 

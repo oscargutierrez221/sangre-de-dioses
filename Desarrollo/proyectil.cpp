@@ -1,5 +1,4 @@
 #include "proyectil.h"
-#include "motor_fisico.cpp"
 
 proyectil::proyectil()
 {
@@ -18,6 +17,7 @@ void proyectil::lanzar(float angulo_lanzamiento, float fuerza_lanzamiento)
 {
     angulo = angulo_lanzamiento;
     fuerza_inicial = fuerza_lanzamiento;
+    fuerza_final = 0;
     en_vuelo = true;
 
     pos_x = x();
@@ -31,14 +31,18 @@ void proyectil::mover()
     if(en_vuelo){
         // Primero aplicamos la gravedad
         motor.aplicar_gravedad(vel_y);
+        motor.aplicar_resistencia(vel_x);
 
         pos_x += vel_x;
         pos_y += vel_y;
 
         setPos(pos_x, pos_y);
 
+        fuerza_final = motor.fuerza_final(vel_x, vel_y);
+
         // Si la lanza se sale de la pantalla, la detenemos
-        if (x() > 1376 || x() < 0 || y() > 2000 || y() < 0) {
+        if (x() > 1376 || x() < 0 || y() > 2000 || y() < 0)
+        {
             en_vuelo = false;
         }
     }
@@ -52,7 +56,8 @@ bool proyectil::esta_en_vuelo()
 void proyectil::preparar(QGraphicsScene *scena, float x_personaje, float y_personaje, QString ruta_sprite, int ancho, int alto, int offset_x, int offset_y)
 {
     // Si ya estaba en la escena la quitamos primero
-    if (scene()) {
+    if (scene())
+    {
         scena->removeItem(this);
     }
 
@@ -69,10 +74,11 @@ void proyectil::preparar(QGraphicsScene *scena, float x_personaje, float y_perso
     en_vuelo = false;
 }
 
-void proyectil::destruir_de_escena()
+float proyectil::get_fuerza_final()
 {
-    en_vuelo = false;
-    if (scene()) {
-        scene()->removeItem(this);
+    if (fuerza_final > 0)
+    {
+        return fuerza_final;
     }
+    return fuerza_inicial;
 }

@@ -8,8 +8,6 @@
 class obstaculo : public entidad
 {
     private:
-        int dureza;
-        int tamanio;
         float velocidad_movimiento;
 
         // Para el movimiento arriba y abajo

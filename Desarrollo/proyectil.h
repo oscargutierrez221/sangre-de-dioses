@@ -34,7 +34,7 @@ class proyectil : public entidad
 
         void preparar(QGraphicsScene *scena, float x_personaje, float y_personaje, QString ruta_sprite, int ancho, int alto, int offset_x, int offset_y);
 
-        void destruir_de_escena();
+        float get_fuerza_final();
 };
 
 #endif // PROYECTIL_H
