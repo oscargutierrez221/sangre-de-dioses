@@ -8,6 +8,7 @@
 #include "entidad.h"
 #include "proyectil.h"
 #include "obstaculo.h"
+#include "baldur.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -52,6 +53,7 @@ private:
     entidad *poseidon;
     entidad *hades;
     entidad *ares;
+    baldur *baldur_ptr;
 
     // Configuracion lanzas
     proyectil *lanza_zeuz;

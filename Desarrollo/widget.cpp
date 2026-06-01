@@ -15,6 +15,7 @@ Widget::Widget(QWidget *parent)
     poseidon = nullptr;
     hades = nullptr;
     ares = nullptr;
+    baldur_ptr = nullptr;
 
     lanza_zeuz = nullptr;
     lanza_poseidon = nullptr;
@@ -105,6 +106,12 @@ void Widget::iniciar_nivel(int personaje)
 
     // Cargamos los obstaculos usando el metodo de la clase obstaculo
     obstaculo::cargar_en_escena(nivel1, obstaculos);
+    if(baldur_ptr != nullptr) {
+        delete baldur_ptr;
+    }
+
+    baldur_ptr = new baldur();
+    baldur_ptr->cargar_en_escena(nivel1);
 
     disconnect(timerJuego, nullptr, this, nullptr);
     connect(timerJuego, &QTimer::timeout, this, &Widget::actualizar_juego);
@@ -164,6 +171,9 @@ void Widget::actualizar_juego(){
     }
 
     revisar_colisiones(lanza);
+
+    if (baldur_ptr != nullptr)
+        baldur_ptr->animar();
 }
 
 void Widget::on_pushButton_lanzar_clicked()
@@ -347,6 +357,29 @@ void Widget::revisar_colisiones(proyectil *lanza)
                 break;
             }
             return;
-            }
         }
+    }
+
+    if (baldur_ptr != nullptr && lanza->collidesWithItem(baldur_ptr)) {
+        float px = lanza->x();
+        float py = lanza->y();
+        baldur_ptr->recibir_impacto();
+        switch (personaje_elegido) {
+        case 0:
+            destruir_lanza(lanza_zeuz, px, py);
+            break;
+        case 1:
+            destruir_lanza(lanza_poseidon, px, py);
+            break;
+        case 2:
+            destruir_lanza(lanza_hades, px, py);
+            break;
+        case 3:
+            destruir_lanza(lanza_ares, px, py);
+            break;
+        default:
+            break;
+        }
+        return;
+    }
 }

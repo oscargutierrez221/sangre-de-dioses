@@ -14,6 +14,7 @@
         <file>Material/poseidon_sprite.png</file>
         <file>Material/hades_sprite.png</file>
         <file>Material/ares_sprite.png</file>
+        <file>Material/baldur_sprite.png</file>
     </qresource>
     <qresource prefix="/new/lanzas">
         <file>Material/lanza_zeuz.png</file>
