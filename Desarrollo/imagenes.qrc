@@ -26,4 +26,9 @@
         <file>Material/escudo_sprite.png</file>
         <file>Material/explosion_sprite.png</file>
     </qresource>
+    <qresource prefix="/new/efectos_sonido">
+        <file>Material/Efectos_sonido/bomba_efecto_sonido.wav</file>
+        <file>Material/Efectos_sonido/herido_efecto_sonido.wav</file>
+        <file>Material/Efectos_sonido/musica_scena_efecto_sonido.wav</file>
+    </qresource>
 </RCC>

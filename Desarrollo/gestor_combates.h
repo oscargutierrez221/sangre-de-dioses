@@ -10,6 +10,7 @@
 #include "obstaculo.h"
 #include "baldur.h"
 #include "panel.h"
+#include "efectos_sonido.h"
 
 class gestor_combates : public QObject
 {
@@ -48,21 +49,22 @@ signals:
     void animacion_terminada();
 
 private:
-    // Referencias al contexto del nivel (no es owner de estos objetos)
-    QGraphicsScene          *nivel1;
-    panel                   *panel_juego;
-    baldur                  *baldur_ptr;
+    // Nivel
+    QGraphicsScene *nivel1;
+    panel *panel_juego;
+    baldur *baldur_ptr;
     std::vector<obstaculo*> *obstaculos;
-    QTimer                  *timerJuego;
+    QTimer *timerJuego;
 
+    // Personajes
     entidad *zeuz;
     entidad *poseidon;
     entidad *hades;
     entidad *ares;
     entidad *agente;
-    int      personaje_elegido;
+    int personaje_elegido;
 
-    // Propietario de estos objetos
+    // Lanzas
     proyectil *lanza_zeuz;
     proyectil *lanza_poseidon;
     proyectil *lanza_hades;
@@ -70,11 +72,16 @@ private:
     proyectil *lanza_agente;
     entidad   *explosion_borde;
 
-    // Helpers internos
-    entidad*   get_personaje_activo() const;
+    // Efectos de sonido
+    efectos_sonido *sonidos;
+
+    // Getters
+    entidad* get_personaje_activo() const;
     proyectil* get_lanza_jugador_interno() const; // alias interno sin const issues
-    void       destruir_lanza(proyectil *&lanza, float pos_x, float pos_y);
-    void       destruir_lanza_jugador(float px, float py);
+
+    // Metodos
+    void destruir_lanza(proyectil *&lanza, float pos_x, float pos_y);
+    void destruir_lanza_jugador(float px, float py);
 };
 
 #endif // GESTOR_COMBATES_H

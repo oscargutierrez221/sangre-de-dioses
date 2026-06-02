@@ -32,6 +32,9 @@ gestor_combates::gestor_combates(QObject *parent)
 
     // Explosion
     explosion_borde = nullptr;
+
+    // Efectos sonido
+    sonidos = new efectos_sonido(this);
 }
 
 gestor_combates::~gestor_combates()
@@ -59,6 +62,8 @@ void gestor_combates::inicializar(QGraphicsScene *escena, panel *panel_ref, bald
     ares = p_ares;
     agente = p_agente;
     personaje_elegido = p_elegido;
+
+    sonidos->reproducir_musica_nivel();
 }
 
 // ─────────────────────────────────────────────
@@ -126,6 +131,8 @@ void gestor_combates::destruir_lanza(proyectil *&lanza, float pos_x, float pos_y
         nivel1->removeItem(explosion_borde);
         delete explosion_borde;
     }
+
+    sonidos->reproducir_explosion();
 
     explosion_borde = new entidad();
     explosion_borde->setPos(pos_x, pos_y);
@@ -244,6 +251,9 @@ void gestor_combates::limpiar_lanzas()
         delete explosion_borde;
         explosion_borde = nullptr;
     }
+
+    // Detener la musica
+    sonidos->detener_musica_nivel();
 
 }
 
@@ -522,6 +532,7 @@ void gestor_combates::revisar_colisiones(proyectil *lanza, bool es_maquina)
         float fuerza = lanza->get_fuerza_final();
 
         baldur_ptr->recibir_impacto();
+        sonidos->reproducir_herido();
 
         if (panel_juego != nullptr)
         {

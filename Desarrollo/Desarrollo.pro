@@ -1,4 +1,4 @@
-QT += widgets
+QT += widgets multimedia
 
 CONFIG += c++17
 
@@ -8,6 +8,7 @@ CONFIG += c++17
 
 SOURCES += \
     baldur.cpp \
+    efectos_sonido.cpp \
     entidad.cpp \
     gestor_combates.cpp \
     main.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
 
 HEADERS += \
     baldur.h \
+    efectos_sonido.h \
     entidad.h \
     gestor_combates.h \
     motor_fisico.h \
