@@ -153,3 +153,10 @@ void panel::devolver_turno_jugador()
     turno_actual = 0;
     actualizar_labels();
 }
+
+void panel::pasar_turno_maquina()
+{
+    turno_actual = 1;
+    actualizar_labels();
+    emit turno_maquina();
+}

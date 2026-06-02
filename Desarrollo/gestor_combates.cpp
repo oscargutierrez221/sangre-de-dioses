@@ -269,6 +269,13 @@ void gestor_combates::actualizar_lanzas()
     {
         lanza->mover();
     }
+    else if (lanza != nullptr && panel_juego != nullptr && panel_juego->get_turno() == 0)
+    {
+        float px = lanza->x();
+        float py = lanza->y();
+        destruir_lanza_jugador(px, py);
+        panel_juego->pasar_turno_maquina();
+    }
 
     if (lanza_agente != nullptr && lanza_agente->esta_en_vuelo())
     {
@@ -400,6 +407,9 @@ void gestor_combates::turno_agente()
     if (agente == nullptr)
         return;
 
+    if (panel_juego != nullptr && panel_juego->get_turno() != 1)
+        return;
+
     static int rondas_agente = 0;
     rondas_agente++;
 
@@ -417,7 +427,7 @@ void gestor_combates::turno_agente()
     QString ruta_lanza = ":/new/lanzas/Material/lanza_hades.png";
     int ancho = 110;
     int alto = 130;
-    int offset_x = -90;
+    int offset_x = 90;
     int offset_y = 30;
 
     switch (personaje_elegido)
@@ -434,7 +444,7 @@ void gestor_combates::turno_agente()
             ruta_lanza = ":/new/lanzas/Material/lanza_zeuz.png";
             ancho = 96;
             alto = 113;
-            offset_x = -60;
+            offset_x = 60;
             offset_y = 0;
             break;
 
@@ -458,7 +468,7 @@ void gestor_combates::turno_agente()
                 lanza_agente = new proyectil();
 
             lanza_agente->preparar(nivel1, agente->x(), agente->y(), ruta_lanza, ancho, alto, offset_x, offset_y);
-            lanza_agente->lanzar(angulo + 90, fuerza);
+            lanza_agente->lanzar(angulo, fuerza);
 
             emit animacion_terminada();
         }
@@ -490,6 +500,8 @@ void gestor_combates::revisar_colisiones(proyectil *lanza, bool es_maquina)
         else
         {
             destruir_lanza_jugador(px, py);
+            if (panel_juego != nullptr)
+                panel_juego->pasar_turno_maquina();
         }
         return;
     }
@@ -518,6 +530,8 @@ void gestor_combates::revisar_colisiones(proyectil *lanza, bool es_maquina)
                 else
                 {
                     destruir_lanza_jugador(px, py);
+                    if (panel_juego != nullptr)
+                        panel_juego->pasar_turno_maquina();
                 }
                 return;
             }

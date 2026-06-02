@@ -222,11 +222,14 @@ void Widget::iniciar_nivel(int personaje)
             break;
     }
 
-    float x_maquina = 1050;
-    float y_maquina = 420;
+    float x_maquina = 80;
+    float y_maquina = 350;
 
     if (jugador != nullptr)
-        y_maquina = jugador->y() + jugador->boundingRect().height();
+    {
+        x_maquina = jugador->x() - 60;
+        y_maquina = jugador->y() + jugador->boundingRect().height() * jugador->scale() * 0.5f;
+    }
 
     agente->setPos(x_maquina, y_maquina);
     nivel1->addItem(agente);

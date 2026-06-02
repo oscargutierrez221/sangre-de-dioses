@@ -60,6 +60,7 @@ public:
     void registrar_golpe_maquina(float fuerza_final);
 
     void devolver_turno_jugador();
+    void pasar_turno_maquina();
     int get_turno(); // 0 = jugador, 1 = maquina
 };
 
