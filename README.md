@@ -1,8 +1,6 @@
-<div align="center">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Escudo-UdeA.svg/200px-Escudo-UdeA.svg.png" height="80" alt="Universidad de Antioquia"/>
-
-<br/><br/>
+<p align="center">
+  <img src="img/Escudo-UdeA.svg" width="150">
+</p>
 
 # ⚔️ Sangre de Dioses
 
