@@ -1,6 +1,6 @@
-<p align="center">
-  <img src="img/Escudo-UdeA.svg" width="150">
-</p>
+<div align="center">
+
+<img src="Momento 4/Informe/Material/Escudo-UdeA.svg" height="80" alt="Universidad de Antioquia"/>
 
 # ⚔️ Sangre de Dioses
 
@@ -146,10 +146,9 @@ Incluye introducción, arquitectura, algoritmos, físicas, guía de instalación
 
 <div align="center">
 
-**Universidad de Antioquia · Facultad de Ingeniería · Informática 2 · 2025**
+**Universidad de Antioquia · Facultad de Ingeniería · Informática 2 · 2026-1**
 
-<p align="center">
-  <img src="Momento 4/Informe/Material/logo udea.png"
-</p>
+<div align="center">
 
+<img src="Momento 4/Informe/Material/Escudo-UdeA.svg" height="80" alt="Universidad de Antioquia"/>
 </div>
