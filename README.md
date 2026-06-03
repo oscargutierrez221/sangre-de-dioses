@@ -1,84 +1,157 @@
-# Sangre de Dioses
+<div align="center">
 
-**Proyecto Final - Informática 2 (Grupo 1)**  
-**Universidad - [Universidad de Antioquia]**
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Escudo-UdeA.svg/200px-Escudo-UdeA.svg.png" height="80" alt="Universidad de Antioquia"/>
 
-## Información del Equipo
+<br/><br/>
 
-- **Oscar David Gutiérrez Hernández**
-- **Johan Steven Guarnizo Posada**
+# ⚔️ Sangre de Dioses
 
-**Curso:** Informática 2 - Grupo 1  
-**Momento actual:** 1 (Fase de planificación y prototipo inicial)
+**Proyecto Final — Informática 2 · Grupo 1**  
+**Universidad de Antioquia · Facultad de Ingeniería**
 
----
+<br/>
 
-## Descripción del Proyecto
+[![Qt](https://img.shields.io/badge/Qt-6.x-41CD52?style=for-the-badge&logo=qt&logoColor=white)](https://www.qt.io/)
+[![C++](https://img.shields.io/badge/C++-17-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)](https://isocpp.org/)
+[![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)](https://archlinux.org/)
+[![GitHub](https://img.shields.io/badge/GitHub-Repositorio-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/oscargutierrez221/sangre-de-dioses)
 
-**Sangre de Dioses** es un juego de lanzamiento de jabalina con temática mitológica. El jugador controla a diferentes dioses y debe realizar lanzamientos precisos mientras enfrenta obstáculos, poderes divinos y mecánicas físicas.
-
-### Concepto principal
-Combinar **física** (trayectorias parabólicas, viento, rotación) con **elementos mitológicos** y un **agente autónomo** (Loki, Apolo, etc.) que modifica la dificultad del juego en tiempo real.
+</div>
 
 ---
 
-## Estructura del Repositorio
+## 👥 Equipo
+
+| Integrante | GitHub |
+|---|---|
+| Oscar David Gutiérrez Hernández | [@oscargutierrez221](https://github.com/oscargutierrez221) |
+
+**Curso:** Informática 2 — Grupo 1  
+**Estado:** Completado ✅
+
+---
+
+## 🎮 Descripción
+
+**Sangre de Dioses** es un videojuego 2D de vista lateral desarrollado en C++ con Qt, ambientado en la mitología nórdica y griega. El jugador elige a uno de cuatro dioses olímpicos y debe lanzar su arma característica contra Baldur usando física parabólica real, esquivando escudos flotantes y compitiendo en turnos contra un agente autónomo que mejora su precisión con cada ronda.
+
+La partida termina cuando se acaba el tiempo (5 minutos) o cuando alguien golpea a Baldur mientras el muérdago está activo — condición de victoria inmediata.
+
+---
+
+## Características
+
+- **Física parabólica real** — gravedad y resistencia del aire, implementados desde cero sin librerías externas
+
+- **4 personajes jugables** — Zeus, Poseidón, Hades y Ares, cada uno con su propio sprite y lanza
+- **Obstáculos móviles** — escudos que se mueven arriba y abajo y explotan al recibir impactos
+- **Baldur animado** — ríe continuamente y salta de posición al recibir golpes
+- **Muérdago aleatorio** — aparece en momentos aleatorios y activa la condición de victoria inmediata
+- **Agente autónomo** — la máquina lanza automáticamente y mejora su precisión ronda a ronda
+- **Panel de juego** — puntos en tiempo real, cuenta regresiva de 5 minutos y turno actual
+- **Efectos de sonido y música** — explosiones, impactos y música de fondo en loop
+
+---
+
+## 🗂️ Estructura del repositorio
 
 ```
 sangre-de-dioses/
-├── Desarrollo/             # Codigo fuente
-│   ├── main.cpp
-│   ├── Desarrollo.pro
-│   └── build/...
+├── Momento 1/
+│   ├── Informe preliminar/        ← Planteamiento inicial
+│   ├── Escenarios/                ← Bocetos de niveles
+│   └── Sprites/                   ← Sprites iniciales
 │
-├── Momento 1/              # Desarrollo entregable 1
-│   ├── Informe preliminar/
-│   │   └── PRIMER MOMENTO.md
-│   └── Escenarios/
-│   └── Sprites/
+├── Momento 2/
+│   ├── Informe descriptivo/       ← Diseño de clases y arquitectura
+│   └── Material/                  ← Diagramas UML inicial
 │
-├── Momento 2/              # Desarrollo entregable 2
-│   ├── Informe preliminar/
-│   │   └── SEGUNDO MOMENTO.md
-│   └── Material/           # Diagrama de clases y demás material usado      
+├── Momento 3/
+│   └── Desarrollo/                ← Código fuente completo
+│       ├── *.h / *.cpp            ← Clases del juego
+│       ├── widget.ui              ← Interfaz Qt Designer
+│       ├── imagenes.qrc           ← Recursos (sprites, sonidos)
+│       └── Material/              ← Assets (sprites, fondos, audio)
+│
+├── Momento 4/
+│   ├── Ejecutables/
+│   │   └── SangreDeDioses.AppImage  ← Ejecutable Linux
+│   │   └── SangreDeDioses.exe       ← Ejecutable Windows
+│   └── Informe/
+│       └── sangre_de_dioses_documentacion.md ← Documentación completa del proyecto
+│
+├── Momento 5/
+│   ├── Trailer/                   ← Video trailer del videojuego
+│   └── Video codigo/              ← Video explicativo del código y ejecución
 │
 └── README.md
 ```
 
-## Características Principales (Momento 1)
+---
 
-- **Nivel 1** — *El Juego de la Invulnerabilidad de Baldur* (Mitología Nórdica)
-  - Vista cenital
-  - Trayectoria parabólica ajustable
-  - Obstáculos móviles (oscilación armónica)
-  - Intervención de Loki
+## 🚀 Instalación y ejecución
 
-- **Nivel 2** — *Juegos Fúnebres en Honor a Patroclo* (Mitología Griega)
-  - Vista lateral
-  - Viento dinámico
-  - Proyectiles divinos
+### Requisitos
 
-- **Agente autónomo** con percepción, razonamiento y aprendizaje
-- Selección de dioses con habilidades únicas
-- Sistema de puntuación y precisión
+- Ordenador con Windows o Linux
+### Descarga
+- Clona el repositorio: https://github.com/oscargutierrez221/sangre-de-dioses.git
+
+
+### Ejecutable Linux (AppImage)
+
+```bash
+chmod +x "Momento 4/Ejecutables/SangreDeDioses.AppImage"
+./"Momento 4/Ejecutables/SangreDeDioses.AppImage"
+```
 
 ---
 
-## Tecnologías Utilizadas
+## 🕹️ Cómo jugar
 
-- **Lenguaje:** C++
-- **Framework:** Qt Creator
-- **Física:** Cálculos matemáticos (parábolas, oscilaciones, colisiones)
-- **Gráficos:** Sprites
+1. Elegir un personaje en la pantalla de inicio
+2. Ajustar el **ángulo** (0–90°) y la **fuerza** con los spinboxes
+3. Presionar **Lanzar** — la lanza sale con física parabólica real
+4. Esquivar los escudos flotantes para llegar a Baldur
+5. Cuando aparezca el aviso **MUÉRDAGO ACTIVO**, golpear a Baldur para ganar instantáneamente
+6. Si no, ganar acumulando más puntos que la máquina antes de que acaben los 5 minutos
+
+> **Tip:** la fuerza con la que llega la lanza determina los puntos. Lanzar con más fuerza desde cerca da más puntos que una lanza débil desde lejos.
+
+---
+
+## 🛠️ Tecnologías
+
+<div align="center">
+
+| Tecnología | Uso |
+|---|---|
+| <img src="https://img.shields.io/badge/C++-17-00599C?logo=cplusplus&logoColor=white"/> | Lenguaje principal |
+| <img src="https://img.shields.io/badge/Qt-6.x-41CD52?logo=qt&logoColor=white"/> | Framework gráfico, audio y UI |
+| <img src="https://img.shields.io/badge/Qt_Multimedia-41CD52?logo=qt&logoColor=white"/> | QSoundEffect + QMediaPlayer |
+| <img src="https://img.shields.io/badge/Arch_Linux-1793D1?logo=arch-linux&logoColor=white"/> | Entorno de desarrollo |
+| <img src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white"/> | Control de versiones |
+
+</div>
 
 ---
 
-## Estado Actual del Proyecto
+## 📄 Documentación
 
-- **Momento 1:** Completado ( Informe preliminar + estructura inicial + escenario (dibujo) + sprite (iniciales) )
-- **Momento 2:** Completado ( Informe preliminar + Diagrama de clases + actualizaacion del escenario (dibujo 2) )
-- **Código:** Falta crear el proyecto con la interfaz grafica de Qt correctamente
-- Sprites en proceso
-- Escenas en progreso
+La documentación completa del proyecto está en:
+
+📁 [`Momento 4/Informe/sangre_de_dioses_documentacion.md`](Momento%204/Informe/sangre_de_dioses_documentacion.md)
+
+Incluye introducción, arquitectura, algoritmos, físicas, guía de instalación, resultados y conclusiones.
 
 ---
+
+<div align="center">
+
+**Universidad de Antioquia · Facultad de Ingeniería · Informática 2 · 2025**
+
+<p align="center">
+  <img src="Momento 4/Informe/Material/logo udea.png"
+</p>
+
+</div>
