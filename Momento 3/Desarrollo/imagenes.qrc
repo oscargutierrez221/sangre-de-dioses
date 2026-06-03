@@ -1,0 +1,34 @@
+<RCC>
+    <qresource prefix="/FondosPersonajes">
+        <file>Material/ZEUZ.png</file>
+        <file>Material/POSEIDON.png</file>
+        <file>Material/HADES.png</file>
+        <file>Material/ARES.png</file>
+    </qresource>
+    <qresource prefix="/new/Fondos">
+        <file>Material/Fondo pantalla nivel 1.png</file>
+        <file>Material/fondoCombate.png</file>
+    </qresource>
+    <qresource prefix="/new/sprite_personajes">
+        <file>Material/SEUZ_sprite.png</file>
+        <file>Material/poseidon_sprite.png</file>
+        <file>Material/hades_sprite.png</file>
+        <file>Material/ares_sprite.png</file>
+        <file>Material/baldur_sprite.png</file>
+    </qresource>
+    <qresource prefix="/new/lanzas">
+        <file>Material/lanza_zeuz.png</file>
+        <file>Material/lanza_poseidon.png</file>
+        <file>Material/lanza_hades.png</file>
+        <file>Material/lanza_ares.png</file>
+    </qresource>
+    <qresource prefix="/new/obstaculos">
+        <file>Material/escudo_sprite.png</file>
+        <file>Material/explosion_sprite.png</file>
+    </qresource>
+    <qresource prefix="/new/efectos_sonido">
+        <file>Material/Efectos_sonido/bomba_efecto_sonido.wav</file>
+        <file>Material/Efectos_sonido/herido_efecto_sonido.wav</file>
+        <file>Material/Efectos_sonido/musica_scena_efecto_sonido.wav</file>
+    </qresource>
+</RCC>
