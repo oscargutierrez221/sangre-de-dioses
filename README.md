@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="Momento 4/Informe/Material/Escudo-UdeA.svg" height="150" alt="Universidad de Antioquia"/>
+<img src="Momento 4/Informe/Material/Escudo-UdeA.svg" height="250" alt="Universidad de Antioquia"/>
 
 # ⚔️ Sangre de Dioses
 
@@ -150,5 +150,5 @@ Incluye introducción, arquitectura, algoritmos, físicas, guía de instalación
 
 <div align="center">
 
-<img src="Momento 4/Informe/Material/Escudo-UdeA.svg" height="150" alt="Universidad de Antioquia"/>
+<img src="Momento 4/Informe/Material/Escudo-UdeA.svg" height="250" alt="Universidad de Antioquia"/>
 </div>
