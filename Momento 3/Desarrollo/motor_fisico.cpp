@@ -32,8 +32,11 @@ double motor_fisico::cos(double x)
 
 double motor_fisico::calcularRaiz(double numero)
 {
-    if (numero < 0) return -1; // Manejo de error para negativos
-    if (numero == 0) return 0;
+    if (numero < 0)
+        return -1; // Manejo de error para negativos
+
+    if (numero == 0)
+        return 0;
 
     double estimacion = numero; // Valor inicial
     double precision = 0.000001; // Margen de error tolerado

@@ -45,15 +45,15 @@ private slots:
 
 private:
     // Elementos graficos
-    Ui::Widget          *ui;
-    QGraphicsScene      *nivel1;
+    Ui::Widget *ui;
+    QGraphicsScene *nivel1;
     QGraphicsPixmapItem *fondo1;
 
     // Temporizador principal
     QTimer *timerJuego;
 
     // Personajes (0=Zeus, 1=Poseidon, 2=Hades, 3=Ares)
-    int      personaje_elegido;
+    int personaje_elegido;
     entidad *zeuz;
     entidad *poseidon;
     entidad *hades;

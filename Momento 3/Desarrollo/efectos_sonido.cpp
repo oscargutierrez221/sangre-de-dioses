@@ -46,6 +46,12 @@ void efectos_sonido::reproducir_herido() {
   sonido_herido->play();
 }
 
-void efectos_sonido::reproducir_musica_nivel() { musica_nivel->play(); }
+void efectos_sonido::reproducir_musica_nivel()
+{
+    musica_nivel->play();
+}
 
-void efectos_sonido::detener_musica_nivel() { musica_nivel->stop(); }
+void efectos_sonido::detener_musica_nivel()
+{
+    musica_nivel->stop();
+}
